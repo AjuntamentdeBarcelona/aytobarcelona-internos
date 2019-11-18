@@ -3,7 +3,7 @@ lock '3.3.5'
 
 set :application, 'internos'
 set :user, 'aytobarcelonadecidim'
-set :repo_url, "https://github.com/aspgems/aytobarcelona-internos.git"
+set :repo_url, "https://github.com/CodiTramuntana/aytobarcelona-internos.git"
 
 set :deploy_to, -> { "/home/#{fetch(:user)}/app" }
 set :keep_releases, 5
