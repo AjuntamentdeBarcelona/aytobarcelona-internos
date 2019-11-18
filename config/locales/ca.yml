@@ -1,0 +1,10 @@
+ca:
+  decidim:
+    debates:
+      debates:
+        filters:
+          citizens: Personal municipal
+    proposals:
+      application_helper:
+        filter_origin_values:
+          citizens: Personal municipal
