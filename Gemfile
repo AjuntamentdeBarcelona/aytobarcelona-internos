@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION= {git: 'https://github.com/decidim/decidim.git', branch: '0.19-stable'}
+DECIDIM_VERSION= {git: 'https://github.com/decidim/decidim.git', branch: 'backport-0.19/fix/meeting-attachments'}
 
 gem 'activerecord-session_store'
 gem 'chamber', '~> 2.10.1'
