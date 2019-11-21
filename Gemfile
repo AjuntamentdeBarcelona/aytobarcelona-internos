@@ -4,11 +4,13 @@ source 'https://rubygems.org'
 
 ruby RUBY_VERSION
 
+DECIDIM_VERSION= {git: 'https://github.com/decidim/decidim.git', branch: '0.19-stable'}
+
 gem 'activerecord-session_store'
 gem 'chamber', '~> 2.10.1'
 
-gem 'decidim', git: 'https://github.com/demonodojo/decidim.git', branch: 'bugfixing'
-gem 'decidim-consultations', git: 'https://github.com/demonodojo/decidim.git', branch: 'bugfixing'
+gem 'decidim', DECIDIM_VERSION
+gem 'decidim-consultations', DECIDIM_VERSION
 gem 'decidim-direct_verifications', '0.17.8'
 gem 'omniauth-saml'
 
