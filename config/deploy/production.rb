@@ -4,9 +4,9 @@
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
 # Don't declare `role :all`, it's a meta role
-role :app, %w(decidimbcn-pro.aspgems.com)
-role :web, %w(decidimbcn-pro.aspgems.com)
-role :db,  %w(decidimbcn-pro.aspgems.com)
+role :app, %w(decidim-intern.ajbcn.coditramuntana.cat)
+role :web, %w(decidim-intern.ajbcn.coditramuntana.cat)
+role :db,  %w(decidim-intern.ajbcn.coditramuntana.cat)
 
 set :app_env, 'master'     # Name used in rollbar/hipchat, etc
 set :branch,   fetch(:app_env)  # Git branch deployed
