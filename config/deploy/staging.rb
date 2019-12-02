@@ -11,7 +11,7 @@ role :db,  %w(decidim-intern-pre.ajbcn.coditramuntana.cat)
 set :app_env, 'master'     # Name used in rollbar/hipchat, etc
 set :branch,   fetch(:app_env)  # Git branch deployed
 set :instance, 'staging'   # Deploy extra files from script/deploy/<instance>
-set :bundle_without, %w{development}.join(' ')  
+set :bundle_without, %w{development test}.join(' ')  
 
 # Extended Server Syntax
 # ======================

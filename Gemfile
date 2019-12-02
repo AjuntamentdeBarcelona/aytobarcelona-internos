@@ -14,9 +14,11 @@ gem 'decidim-consultations', DECIDIM_VERSION
 gem 'decidim-direct_verifications', '0.17.8'
 gem 'omniauth-saml'
 
+# Metrics require a queue system and a daily cron
 gem 'delayed_job_active_record'
 # daemons: required to manage the delayed_job background process
 gem 'daemons'
+gem 'whenever', require: false
 
 gem 'bootsnap', '~> 1.3'
 
@@ -41,6 +43,7 @@ group :development do
   gem 'capistrano-faster-assets', '~> 1.0'
   gem 'capistrano-passenger'
   gem 'capistrano-rails'
+  gem 'capistrano3-delayed-job', '~> 1.0'
   gem 'letter_opener_web', '~> 1.3'
   gem 'listen', '~> 3.1'
   gem 'spring', '~> 2.0'
