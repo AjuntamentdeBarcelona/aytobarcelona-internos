@@ -14,6 +14,10 @@ gem 'decidim-consultations', DECIDIM_VERSION
 gem 'decidim-direct_verifications', '0.17.8'
 gem 'omniauth-saml'
 
+gem 'delayed_job_active_record'
+# daemons: required to manage the delayed_job background process
+gem 'daemons'
+
 gem 'bootsnap', '~> 1.3'
 
 gem 'puma', '~> 3.0'
@@ -43,6 +47,3 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0'
   gem 'web-console', '~> 3.5'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
