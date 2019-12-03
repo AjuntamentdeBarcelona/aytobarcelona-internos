@@ -54,7 +54,11 @@ if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
       valid_cn?(response.attributes.multi(:ACL)) || valid_type?(response.attributes.multi(:tipusUsuari))
     end
 
+    # ACL starting with `cn=ACCES` mean that the user is an admin.
+    # The user should be allowed whatever its type.
     def valid_cn?(acl_list)
+      # Sometimes we receive "ACCES" and some times "ACCESS" so we use
+      # a regexp with the shorter one.
       acl_list.any? { |acl| /cn=#{Chamber.env.saml.cn}(,|\b)/i.match? acl }
     end
 
