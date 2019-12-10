@@ -22,7 +22,7 @@ gem 'whenever', require: false
 
 gem 'bootsnap', '~> 1.3'
 
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 4.3'
 gem 'uglifier', '~> 4.1'
 
 gem 'faker', '~> 1.9'
