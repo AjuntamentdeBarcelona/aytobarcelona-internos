@@ -8,6 +8,7 @@ DECIDIM_VERSION= {git: 'https://github.com/decidim/decidim.git', branch: '0.19-s
 
 gem 'activerecord-session_store'
 gem 'chamber', '~> 2.10.1'
+gem 'decidim-term_customizer'
 
 gem 'decidim', DECIDIM_VERSION
 gem 'decidim-consultations', DECIDIM_VERSION
