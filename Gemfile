@@ -29,6 +29,7 @@ gem 'uglifier', '~> 4.1'
 gem 'faker', '~> 1.9'
 
 gem 'httplog'
+gem "deface"
 
 group :development, :test do
   gem 'byebug', '~> 10.0', platform: :mri
