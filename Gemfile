@@ -23,18 +23,19 @@ gem 'whenever', require: false
 
 gem 'bootsnap', '~> 1.3'
 
-gem 'puma', '~> 4.3'
+# can't update until decicim-dev is higher gem 'puma', '~> 4.3'
+gem 'puma', '~> 3.12'
 gem 'uglifier', '~> 4.1'
 
-gem 'faker', '~> 1.9'
 
 gem 'httplog'
 gem "deface"
 
 group :development, :test do
-  gem 'byebug', '~> 10.0', platform: :mri
-
-  #gem 'decidim-dev', '~> 0.17.1'
+  gem 'byebug', platform: :mri
+  gem 'rspec-rails'
+  gem 'decidim-dev', DECIDIM_VERSION
+  gem 'faker', '~> 1.9'
 end
 
 group :development do
