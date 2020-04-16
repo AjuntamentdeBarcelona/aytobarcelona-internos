@@ -26,7 +26,8 @@ gem 'bootsnap', '~> 1.3'
 # can't update until decicim-dev is higher gem 'puma', '~> 4.3'
 gem 'puma', '~> 3.12'
 gem 'uglifier', '~> 4.1'
-
+# geocoder can not be upgraded to 1.6 until the Here maps api key is changed for the new one
+gem "geocoder", "~> 1.5.2"
 
 gem 'httplog'
 gem "deface"
