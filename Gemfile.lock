@@ -825,6 +825,7 @@ DEPENDENCIES
   deface
   delayed_job_active_record
   faker (~> 1.9)
+  geocoder (~> 1.5.2)
   httplog
   letter_opener_web (~> 1.3)
   listen (~> 3.1)
