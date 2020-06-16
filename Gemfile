@@ -4,11 +4,12 @@ source 'https://rubygems.org'
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION= {git: 'https://github.com/decidim/decidim.git', branch: '0.19-stable'}
+DECIDIM_VERSION = { git: 'https://github.com/decidim/decidim.git', branch: '0.20-stable' }
 
 gem 'activerecord-session_store'
 gem 'chamber', '~> 2.10.1'
-gem 'decidim-term_customizer'
+# Change term_customizer dependency to ruby-gems' when term-customizer is compatible with DECIDIM_VERSION
+gem 'decidim-term_customizer', git: "https://github.com/CodiTramuntana/decidim-module-term_customizer"
 
 gem 'decidim', DECIDIM_VERSION
 gem 'decidim-consultations', DECIDIM_VERSION
@@ -23,6 +24,7 @@ gem 'whenever', require: false
 
 gem 'bootsnap', '~> 1.3'
 
+gem 'rails', '< 6'
 # can't update until decicim-dev is higher gem 'puma', '~> 4.3'
 gem 'puma', '~> 3.12'
 gem 'uglifier', '~> 4.1'
