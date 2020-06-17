@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = { git: 'https://github.com/decidim/decidim.git', branch: '0.21-stable' }
+DECIDIM_VERSION = { git: 'https://github.com/decidim/decidim.git', branch: '0.20-stable' }
 
 gem 'activerecord-session_store'
 gem 'chamber', '~> 2.10.1'
@@ -25,7 +25,8 @@ gem 'whenever', require: false
 gem 'bootsnap', '~> 1.3'
 
 gem 'rails', '< 6'
-gem 'puma'
+
+gem 'puma', '~> 4.3'
 gem 'uglifier', '~> 4.1'
 # geocoder can not be upgraded to 1.6 until the Here maps api key is changed for the new one
 gem "geocoder", "~> 1.5.2"
