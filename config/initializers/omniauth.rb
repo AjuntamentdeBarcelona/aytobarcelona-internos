@@ -17,23 +17,23 @@ end
 
 Rails.logger.info "SAML ENABLED? #{Rails.application.secrets.dig(:omniauth, :saml, :enabled)}"
 if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
-  # Devise.setup do |config|
-  #   config.omniauth :saml,
-  #                   idp_cert: Chamber.env.saml.idp_cert,
-  #                   idp_sso_target_url: Chamber.env.saml.idp_sso_target_url,
-  #                   sp_entity_id: Chamber.env.saml.sp_entity_id,
-  #                   strategy_class: ::OmniAuth::Strategies::SAML,
-  #                   attribute_statements: {
-  #                     email: ['mail'],
-  #                     name: ['givenName', 'nom']
-  #                   },
-  #                   certificate: Chamber.env.saml.certificate,
-  #                   private_key: Chamber.env.saml.private_key,
-  #                   security: {
-  #                     authn_requests_signed: true,
-  #                     signature_method: XMLSecurity::Document::RSA_SHA256
-  #                   }
-  # end
+  Devise.setup do |config|
+    config.omniauth :saml,
+                    idp_cert: Chamber.env.saml.idp_cert,
+                    idp_sso_target_url: Chamber.env.saml.idp_sso_target_url,
+                    sp_entity_id: Chamber.env.saml.sp_entity_id,
+                    strategy_class: ::OmniAuth::Strategies::SAML,
+                    attribute_statements: {
+                      email: ['mail'],
+                      name: ['givenName', 'nom']
+                    },
+                    certificate: Chamber.env.saml.certificate,
+                    private_key: Chamber.env.saml.private_key,
+                    security: {
+                      authn_requests_signed: true,
+                      signature_method: XMLSecurity::Document::RSA_SHA256
+                    }
+  end
 
   Devise::OmniauthCallbacksController.class_eval do
     skip_before_action :verify_authenticity_token
