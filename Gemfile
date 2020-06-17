@@ -29,7 +29,7 @@ gem 'rails', '< 6'
 gem 'puma', '~> 4.3'
 gem 'uglifier', '~> 4.1'
 # geocoder can not be upgraded to 1.6 until the Here maps api key is changed for the new one
-gem "geocoder", "~> 1.5.2"
+gem "geocoder", "~> 1.6.1"
 
 gem 'httplog'
 gem "deface"
