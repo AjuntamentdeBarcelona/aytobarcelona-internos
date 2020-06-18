@@ -21,6 +21,11 @@ user.save!
 
 You're good to go!
 
+## TODO
+
+Until Decidim v0.22 is released an initializer to configure the SAML integration is kept in `config/initializers/omniauth.rb`.
+When upgrading to v0.22 which includes the fix https://github.com/decidim/decidim/pull/6042 the initializer should be removed and the configuration in `config/secrets.yml` should be reviewed.
+
 ## SAML integration
 
 The [ruby-saml](https://github.com/onelogin/ruby-saml) gem allows to integrate a SAML single sign on strategy.

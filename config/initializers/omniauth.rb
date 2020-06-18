@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 if Rails.application.secrets.dig(:omniauth, :imipre, :enabled)
-  module OmniAuth
-    module Strategies
-      # tell OmniAuth to load our strategy
-      autoload :Imipre, Rails.root.join('lib', 'imipre_strategy')
-    end
-  end
+  # module OmniAuth
+  #   module Strategies
+  #     # tell OmniAuth to load our strategy
+  #     autoload :Imipre, Rails.root.join('lib', 'imipre_strategy')
+  #   end
+  # end
 
-  Devise.setup do |config|
-    config.omniauth :imipre, scope: Chamber.env.imipre.scope, domain: Chamber.env.imipre.domain
-  end
+  # Devise.setup do |config|
+  #   config.omniauth :imipre, scope: Chamber.env.imipre.scope, domain: Chamber.env.imipre.domain
+  # end
 
-  Decidim::User.omniauth_providers << :imipre
+  # Decidim::User.omniauth_providers << :imipre
 end
 
 Rails.logger.info "SAML ENABLED? #{Rails.application.secrets.dig(:omniauth, :saml, :enabled)}"
@@ -67,7 +67,7 @@ if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
     end
   end
 
-  Decidim::User.omniauth_providers << :saml
+  # Decidim::User.omniauth_providers << :saml
 end
 
 OmniAuth.config.logger = Rails.logger
