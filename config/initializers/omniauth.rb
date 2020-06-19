@@ -1,5 +1,14 @@
 # frozen_string_literal: true
 
+if Rails.application.secrets.dig(:omniauth, :imipre, :enabled)
+  module OmniAuth
+    module Strategies
+      # tell OmniAuth to load our strategy
+      autoload :Imipre, Rails.root.join('lib', 'imipre_strategy')
+    end
+  end
+end
+
 Rails.logger.info "SAML ENABLED? #{Rails.application.secrets.dig(:omniauth, :saml, :enabled)}"
 if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
   Devise.setup do |config|
