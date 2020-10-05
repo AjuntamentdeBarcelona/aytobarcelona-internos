@@ -26,6 +26,13 @@ You're good to go!
 Until Decidim v0.22 is released an initializer to configure the SAML integration is kept in `config/initializers/omniauth.rb`.
 When upgrading to v0.22 which includes the fix https://github.com/decidim/decidim/pull/6042 the initializer should be removed and the configuration in `config/secrets.yml` should be reviewed.
 
+## Configuration
+
+There are some tasks to secure secret keys via `chamber` gem for the different environments in `lib/tasks/chamber.rake`, specially `chamber:secure_all` should be taken into account.
+
+Also be aware of the Capistrano related `lib/capistrano/tasks/stage_files.rake` task which overrides secrets when deploying.
+
+
 ## SAML integration
 
 The [ruby-saml](https://github.com/onelogin/ruby-saml) gem allows to integrate a SAML single sign on strategy.
