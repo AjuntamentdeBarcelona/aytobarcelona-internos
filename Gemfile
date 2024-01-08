@@ -8,8 +8,8 @@ DECIDIM_VERSION = { git: 'https://github.com/decidim/decidim.git', branch: 'rele
 
 gem 'activerecord-session_store'
 gem 'chamber', '~> 2.10.1'
-# Change term_customizer dependency to ruby-gems' when term-customizer is compatible with DECIDIM_VERSION
-gem 'decidim-term_customizer', git: "https://github.com/CodiTramuntana/decidim-module-term_customizer"
+# Change term_customizer dependency to ruby-gems' when term-customizer is compatible with DECIDIM_bVERSION
+gem 'decidim-term_customizer', git: 'https://github.com/mainio/decidim-module-term_customizer', branch: '0.22-stable'
 
 gem 'decidim', DECIDIM_VERSION
 gem 'decidim-consultations', DECIDIM_VERSION

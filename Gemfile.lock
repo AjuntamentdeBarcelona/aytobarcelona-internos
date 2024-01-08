@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/CodiTramuntana/decidim-module-term_customizer
-  revision: c4ed0ffa87bd9977c6b470aa815d5dc2ed9f88a5
-  specs:
-    decidim-term_customizer (0.18.0)
-      decidim-admin (>= 0.18.0)
-      decidim-core (>= 0.18.0)
-
-GIT
   remote: https://github.com/decidim/decidim.git
   revision: cd9f76bcbf8b224a424126aa02b4d623b5e9ba29
   branch: release/0.22-stable
@@ -208,6 +200,15 @@ GIT
       sassc-rails (~> 2.1.2)
     decidim-verifications (0.22.0)
       decidim-core (= 0.22.0)
+
+GIT
+  remote: https://github.com/mainio/decidim-module-term_customizer
+  revision: 677cc207224c900ff65a5f48ed70bc80853fc963
+  branch: 0.22-stable
+  specs:
+    decidim-term_customizer (0.22.0)
+      decidim-admin (~> 0.22.0)
+      decidim-core (~> 0.22.0)
 
 GEM
   remote: https://rubygems.org/
@@ -453,7 +454,7 @@ GEM
     faraday-net_http_persistent (1.2.0)
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
-    ffi (1.9.25)
+    ffi (1.14.0)
     file_validators (2.3.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
