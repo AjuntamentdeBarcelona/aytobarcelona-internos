@@ -93,4 +93,12 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 
+  config.before do
+    I18n.available_locales = [:en, :ca, :es]
+    I18n.default_locale = :ca
+    I18n.locale = :ca
+    Decidim.available_locales = [:en, :ca, :es]
+    Decidim.default_locale = :en
+    Capybara.server = :puma
+  end
 end

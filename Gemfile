@@ -36,7 +36,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'decidim-dev', DECIDIM_VERSION
-  gem 'faker', '~> 1.9'
+  gem 'faker', "~> 2.14"
 end
 
 group :development do
