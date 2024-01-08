@@ -4,16 +4,16 @@ source 'https://rubygems.org'
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = { git: 'https://github.com/decidim/decidim.git', branch: 'release/0.22-stable' }
+DECIDIM_VERSION = { git: 'https://github.com/decidim/decidim.git', branch: 'release/0.23-stable' }
 
 gem 'activerecord-session_store'
 gem 'chamber', '~> 2.10.1'
 # Change term_customizer dependency to ruby-gems' when term-customizer is compatible with DECIDIM_bVERSION
-gem 'decidim-term_customizer', git: 'https://github.com/mainio/decidim-module-term_customizer', branch: '0.22-stable'
+gem 'decidim-term_customizer', git: 'https://github.com/mainio/decidim-module-term_customizer', branch: '0.23-stable'
 
 gem 'decidim', DECIDIM_VERSION
 gem 'decidim-consultations', DECIDIM_VERSION
-gem 'decidim-direct_verifications', '~> 0.22.0'
+gem 'decidim-direct_verifications', '~> 1.0.0'
 gem 'omniauth-saml'
 
 # Metrics require a queue system and a daily cron

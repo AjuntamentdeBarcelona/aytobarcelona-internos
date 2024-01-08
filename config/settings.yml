@@ -12,7 +12,8 @@ default: &default
     site: https://appspre.ajuntament.bcn
     redirect_uri: https://aytobarcelona-decidim.dev.aspgems.com/users/auth/imipre/callback
 
-  here_api_key: <%= ENV["HERE_API_KEY"] %>
+  maps:
+    api_key: <%= ENV["MAPS_API_KEY"] %>
 
   saml:
     idp_sso_target_url: <%= ENV['IDP_SSO_TARGET_URL'] %>
