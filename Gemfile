@@ -13,7 +13,7 @@ gem 'decidim-term_customizer', git: 'https://github.com/mainio/decidim-module-te
 
 gem 'decidim', DECIDIM_VERSION
 gem 'decidim-consultations', DECIDIM_VERSION
-gem 'decidim-direct_verifications', '0.17.8'
+gem 'decidim-direct_verifications', '~> 0.22.0'
 gem 'omniauth-saml'
 
 # Metrics require a queue system and a daily cron
