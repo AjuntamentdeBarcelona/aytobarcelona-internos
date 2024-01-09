@@ -9,7 +9,8 @@ set :deploy_to, -> { "/home/#{fetch(:user)}/app" }
 set :keep_releases, 5
 
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/chamber.pem')
-set :linked_dirs,  fetch(:linked_dirs,  []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+set :linked_dirs,  fetch(:linked_dirs,  []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads',
+                                                 'storage', 'tmp/webpacker-cache', 'node_modules', 'public/decidim-packs')
 
 # Files that won't be copied from script/deploy/{branch}/ into the root directory
 set :exclude_deployment_files, []
@@ -45,6 +46,17 @@ namespace :deploy do
       execute "ln -s #{shared_path}/config/chamber.pem #{release_path}/.chamber.pem"
     end
   end
+
+  desc "Decidim webpacker configuration"
+  task :decidim_webpacker_install do
+    on roles(:all) do
+      within release_path do
+        execute :npm, "install"
+      end
+    end
+  end
+
+  before "deploy:assets:precompile", "deploy:decidim_webpacker_install"
 end
 
 after 'bundler:install', 'deploy:create_symlink'

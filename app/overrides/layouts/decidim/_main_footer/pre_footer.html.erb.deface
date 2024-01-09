@@ -12,7 +12,7 @@
       <div class="row">
         <div class="small-8 medium-6 large-12 columns small-centered ">
           <%= link_to t("feder.url") do %>
-            <%= image_tag "feder-logo.png", alt: "FEDER" %>
+            <%= image_pack_tag "media/images/feder-logo.png", alt: "FEDER" %>
           <% end %>
         </div>
       </div>
