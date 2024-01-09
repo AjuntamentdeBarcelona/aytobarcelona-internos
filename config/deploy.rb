@@ -1,29 +1,31 @@
-# config valid only for current version of Capistrano
-lock '3.3.5'
+# frozen_string_literal: true
 
-set :application, 'internos'
-set :user, 'aytobarcelonadecidim'
+# config valid only for current version of Capistrano
+lock "3.3.5"
+
+set :application, "internos"
+set :user, "aytobarcelonadecidim"
 set :repo_url, "https://github.com/AjuntamentdeBarcelona/aytobarcelona-internos.git"
 
 set :deploy_to, -> { "/home/#{fetch(:user)}/app" }
 set :keep_releases, 5
 
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/chamber.pem')
-set :linked_dirs,  fetch(:linked_dirs,  []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads',
-                                                 'storage', 'tmp/webpacker-cache', 'node_modules', 'public/decidim-packs')
+set :linked_files, fetch(:linked_files, []).push("config/database.yml", "config/chamber.pem")
+set :linked_dirs, fetch(:linked_dirs, []).push("log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads",
+                                               "storage", "tmp/webpacker-cache", "node_modules", "public/decidim-packs")
 
 # Files that won't be copied from script/deploy/{branch}/ into the root directory
 set :exclude_deployment_files, []
 
-set :ssh_options, -> {
+set :ssh_options, lambda {
   {
-      user: fetch(:user),
-      forward_agent: true,
-      compression: 'none'
+    user: fetch(:user),
+    forward_agent: true,
+    compression: "none"
   }
 }
 
-set :rails_env, 'production'
+set :rails_env, "production"
 set :scm, :git
 set :log_level, :info
 
@@ -34,12 +36,12 @@ set :db_local_clean, true
 # This directory must be in your shared directory on the server
 set :assets_dir, %w(public/assets)
 # if you want to work on a specific local environment (default = ENV['RAILS_ENV'] || 'development')
-set :locals_rails_env, 'development'
+set :locals_rails_env, "development"
 
 set :passenger_restart_with_touch, true
 
 namespace :deploy do
-  desc 'Create chamber.pem symlink'
+  desc "Create chamber.pem symlink"
   task :create_symlink do
     on roles(:app) do
       # Asegurar que shared path y latest release tienen valor/existen
@@ -59,4 +61,4 @@ namespace :deploy do
   before "deploy:assets:precompile", "deploy:decidim_webpacker_install"
 end
 
-after 'bundler:install', 'deploy:create_symlink'
+after "bundler:install", "deploy:create_symlink"

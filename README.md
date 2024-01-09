@@ -129,7 +129,7 @@ Al autenticar con OAUTH comprueba que los campos del csv tengan el estado activo
 
 Ejemplo de csv:
 
-```
+```csv
 Matricula;Cognoms;Nom;mail;Estat;Tipus d'Empleat
 DXXXXXX;Sanchez Inclan ;Manuel;msinclan@bcn.cat;ACTIVE;T1
 ```

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # extends the title size to 250 characters
 Rails.application.configure do
   config.after_initialize do

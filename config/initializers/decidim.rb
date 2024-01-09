@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 Decidim.configure do |config|
-  config.application_name = 'Decidim Ajuntament de Barcelona'
-  config.mailer_sender = 'svc_decidim@bcn.cat'
+  config.application_name = "Decidim Ajuntament de Barcelona"
+  config.mailer_sender = "svc_decidim@bcn.cat"
 
   # Change these lines to set your preferred locales
   config.default_locale = :ca
-  config.available_locales = %i[ca]
+  config.available_locales = [:ca]
 
   # Geocoder configuration
   if Rails.application.secrets.maps
@@ -28,7 +28,7 @@ Decidim.configure do |config|
   # end
 
   # Currency unit
-  config.currency_unit = '€'
+  config.currency_unit = "€"
 
   # The number of reports which an object can receive before hiding it
   # config.max_reports_before_hiding = 3

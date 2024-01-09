@@ -1,4 +1,6 @@
-require_relative 'boot'
+# frozen_string_literal: true
+
+require_relative "boot"
 
 require "decidim/rails"
 # Add the frameworks used by your app that are not loaded by Decidim.
@@ -21,20 +23,21 @@ module Internos
     # the framework and any gems in your application.
 
     # Load chamber settings because we use it in this file
-    Chamber.load files: [Rails.root + 'config/settings.yml', Rails.root + 'config/settings/**/*.{yml,yml.erb}'],
-                 decryption_key: Rails.root + 'config/chamber.pem',
+    Chamber.load files: [Rails.root.join("config/settings.yml"), Rails.root.join("config/settings/**/*.{yml,yml.erb}")],
+                 decryption_key: Rails.root.join("config/chamber.pem"),
                  namespaces: {
                    environment: -> { ::Rails.env },
-                   hostname:    -> { Socket.gethostname } }
+                   hostname: -> { Socket.gethostname }
+                 }
     # We need to initialize before load_environment_config because railties initialize it before config with default
     # parameters.
-    initializer 'internos.chamber.load', before: :load_environment_config do
-      Chamber.load files: [Rails.root + 'config/settings.yml', Rails.root + 'config/settings/**/*.{yml,yml.erb}'],
-                   decryption_key: Rails.root + 'config/chamber.pem',
+    initializer "internos.chamber.load", before: :load_environment_config do
+      Chamber.load files: [Rails.root.join("config/settings.yml"), Rails.root.join("config/settings/**/*.{yml,yml.erb}")],
+                   decryption_key: Rails.root.join("config/chamber.pem"),
                    namespaces: {
                      environment: -> { ::Rails.env },
-                     hostname:    -> { Socket.gethostname } }
+                     hostname: -> { Socket.gethostname }
+                   }
     end
-
   end
 end

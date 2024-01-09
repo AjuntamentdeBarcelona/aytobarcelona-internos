@@ -4,7 +4,7 @@ if Rails.application.secrets.dig(:omniauth, :imipre, :enabled)
   module OmniAuth
     module Strategies
       # tell OmniAuth to load our strategy
-      autoload :Imipre, Rails.root.join('lib', 'imipre_strategy')
+      autoload :Imipre, Rails.root.join("lib/imipre_strategy")
     end
   end
 end
@@ -18,8 +18,8 @@ if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
                     sp_entity_id: Chamber.env.saml.sp_entity_id,
                     strategy_class: ::OmniAuth::Strategies::SAML,
                     attribute_statements: {
-                      email: ['mail'],
-                      name: ['givenName', 'nom']
+                      email: ["mail"],
+                      name: %w(givenName nom)
                     },
                     certificate: Chamber.env.saml.certificate,
                     private_key: Chamber.env.saml.private_key,
@@ -35,7 +35,7 @@ if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
     before_action :verify_user_type, only: :saml
 
     def verify_user_type
-      saml_response = OneLogin::RubySaml::Response.new(params['SAMLResponse'])
+      saml_response = OneLogin::RubySaml::Response.new(params["SAMLResponse"])
       unless valid_user?(saml_response)
         flash[:error] = I18n.t("devise.failure.invalid_user_type")
         redirect_to root_path

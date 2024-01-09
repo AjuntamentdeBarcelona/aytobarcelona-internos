@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'omniauth-oauth2'
-require 'open-uri'
+require "omniauth-oauth2"
+require "open-uri"
 
 module OmniAuth
   module Strategies
@@ -26,13 +26,13 @@ module OmniAuth
       end
 
       uid do
-        employee = Employee.find_by!(code: raw_info['sub'])
-        raw_info['sub']
+        Employee.find_by!(code: raw_info["sub"])
+        raw_info["sub"]
       end
 
       # TODO: Check raw info content for user type
       info do
-        employee = Employee.find_by!(code: raw_info['sub'])
+        employee = Employee.find_by!(code: raw_info["sub"])
         if employee.present?
           {
             email: employee.email,
@@ -51,9 +51,8 @@ module OmniAuth
       end
 
       def raw_info
-        access_token.options[:mode]= :query
-        @raw_info ||= access_token.get(Chamber.env.imipre.info_url, {headers: { 'X-OAUTH-IDENTITY-DOMAIN-NAME':  Chamber.env.imipre.domain }}
-        ).parsed
+        access_token.options[:mode] = :query
+        @raw_info ||= access_token.get(Chamber.env.imipre.info_url, { headers: { 'X-OAUTH-IDENTITY-DOMAIN-NAME': Chamber.env.imipre.domain } }).parsed
       end
 
       # https://github.com/intridea/omniauth-oauth2/issues/81
@@ -66,7 +65,7 @@ module OmniAuth
       def authorize_url
         @authorize_url ||= URI.join(
           options.site,
-          '/oauth2/rest/authz?response_type=code'\
+          "/oauth2/rest/authz?response_type=code"\
           "&client_id=#{options.client_id}"\
           "&domain=#{Chamber.env.imipre.domain}"\
           "&scope=#{Chamber.env.imipre.scope}"\
