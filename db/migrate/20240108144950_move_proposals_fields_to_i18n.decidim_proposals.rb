@@ -23,6 +23,7 @@ class MoveProposalsFieldsToI18n < ActiveRecord::Migration[5.2]
         proposal.new_title = {
           locale => proposal.title
         }
+        proposal.title = ""
         proposal.new_body = {
           locale => proposal.body
         }
