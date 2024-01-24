@@ -8,20 +8,20 @@ module OmniAuth
     # Omniauth client for Imipre
     class Imipre < OmniAuth::Strategies::OAuth2
       option :name, :imipre
-      option :client_id, Chamber.env.imipre.client_id
-      option :client_secret, Chamber.env.imipre.client_secret
-      option :site, Chamber.env.imipre.site
+      option :client_id, Rails.application.secrets.dig(:omniauth, :imipre, :client_id)
+      option :client_secret, Rails.application.secrets.dig(:omniauth, :imipre, :client_secret)
+      option :site, Rails.application.secrets.dig(:omniauth, :imipre, :site_url)
       option :client_options, {}
-      option :redirect_uri, Chamber.env.imipre.redirect_uri
+      option :redirect_uri, Rails.application.secrets.dig(:omniauth, :imipre, :redirect_uri)
 
       def authorize_params
         super.tap do |params|
-          params[:scope] = Chamber.env.imipre.scope
+          params[:scope] = Rails.application.secrets.dig(:omniauth, :imipre, :scope)
         end
       end
 
       def build_access_token
-        options.token_params.merge!(headers: { 'X-OAUTH-IDENTITY-DOMAIN-NAME': Chamber.env.imipre.domain })
+        options.token_params.merge!(headers: { 'X-OAUTH-IDENTITY-DOMAIN-NAME': Rails.application.secrets.dig(:omniauth, :imipre, :domain) })
         super
       end
 
@@ -52,7 +52,8 @@ module OmniAuth
 
       def raw_info
         access_token.options[:mode] = :query
-        @raw_info ||= access_token.get(Chamber.env.imipre.info_url, { headers: { 'X-OAUTH-IDENTITY-DOMAIN-NAME': Chamber.env.imipre.domain } }).parsed
+        @raw_info ||= access_token.get(Rails.application.secrets.dig(:omniauth, :imipre, :info_url),
+                                       { headers: { 'X-OAUTH-IDENTITY-DOMAIN-NAME': Rails.application.secrets.dig(:omniauth, :imipre, :domain) } }).parsed
       end
 
       # https://github.com/intridea/omniauth-oauth2/issues/81
@@ -67,9 +68,9 @@ module OmniAuth
           options.site,
           "/oauth2/rest/authz?response_type=code"\
           "&client_id=#{options.client_id}"\
-          "&domain=#{Chamber.env.imipre.domain}"\
-          "&scope=#{Chamber.env.imipre.scope}"\
-          "&redirect_uri=#{Chamber.env.imipre.redirect_uri}"
+          "&domain=#{Rails.application.secrets.dig(:omniauth, :imipre, :domain)}"\
+          "&scope=#{Rails.application.secrets.dig(:omniauth, :imipre, :scope)}"\
+          "&redirect_uri=#{Rails.application.secrets.dig(:omniauth, :imipre, :redirect_uri)}"
         ).to_s
       end
 

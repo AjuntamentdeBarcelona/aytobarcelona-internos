@@ -1,5 +1,4 @@
 # Load DSL and set up stages
-require 'chamber'
 require 'capistrano/setup'
 
 # Include default deployment tasks

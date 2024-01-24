@@ -13,16 +13,16 @@ Rails.logger.info "SAML ENABLED? #{Rails.application.secrets.dig(:omniauth, :sam
 if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
   Devise.setup do |config|
     config.omniauth :saml,
-                    idp_cert: Chamber.env.saml.idp_cert,
-                    idp_sso_target_url: Chamber.env.saml.idp_sso_target_url,
-                    sp_entity_id: Chamber.env.saml.sp_entity_id,
+                    idp_cert: Rails.application.secrets.dig(:omniauth, :saml, :idp_cert),
+                    idp_sso_target_url: Rails.application.secrets.dig(:omniauth, :saml, :idp_sso_target_url),
+                    sp_entity_id: Rails.application.secrets.dig(:omniauth, :saml, :sp_entity_id),
                     strategy_class: ::OmniAuth::Strategies::SAML,
                     attribute_statements: {
                       email: ["mail"],
                       name: %w(givenName nom)
                     },
-                    certificate: Chamber.env.saml.certificate,
-                    private_key: Chamber.env.saml.private_key,
+                    certificate: Rails.application.secrets.dig(:omniauth, :saml, :certificate),
+                    private_key: Rails.application.secrets.dig(:omniauth, :saml, :private_key),
                     security: {
                       authn_requests_signed: true,
                       signature_method: XMLSecurity::Document::RSA_SHA256
@@ -53,11 +53,11 @@ if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
     def valid_cn?(acl_list)
       # Sometimes we receive "ACCES" and some times "ACCESS" so we use
       # a regexp with the shorter one.
-      acl_list.any? { |acl| /cn=#{Chamber.env.saml.cn}(,|\b)/i.match? acl }
+      acl_list.any? { |acl| /cn=#{Rails.application.secrets.dig(:omniauth, :saml, :cn)}(,|\b)/i.match? acl }
     end
 
     def valid_type?(type_list)
-      type_list.any? { |type| type.in? Chamber.env.saml.user_types }
+      type_list.any? { |type| type.in? Rails.application.secrets.dig(:omniauth, :saml, :user_types) }
     end
   end
 

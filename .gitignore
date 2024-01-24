@@ -47,3 +47,6 @@ config/*-development.yml
 yarn-debug.log*
 .yarn-integrity
 .rubocop-https*
+
+.rbenv-vars
+config/application.yml

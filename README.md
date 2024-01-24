@@ -28,19 +28,6 @@ You're good to go!
 Until Decidim v0.22 is released an initializer to configure the SAML integration is kept in `config/initializers/omniauth.rb`.
 When upgrading to v0.22 which includes the fix https://github.com/decidim/decidim/pull/6042 the initializer should be removed and the configuration in `config/secrets.yml` should be reviewed.
 
-## Configuration
-
-There are some tasks to secure secret keys via `chamber` gem for the different environments in `lib/tasks/chamber.rake`, specially `chamber:secure_all` should be taken into account.
-
-Also be aware of the Capistrano related `lib/capistrano/tasks/stage_files.rake` task which overrides secrets when deploying.
-
-So to change a key value for a given environment the steps to follow are:
-
-- change the key in the path for the corresponding environment or environments: `script/deploy/#{environment}/config/settings/*.yml`
-- execute `bundle exec rake chamber:secure_all`
-- commit the cyphered keys
-- proceed with the usual deploy
-
 ## SAML integration
 
 The [ruby-saml](https://github.com/onelogin/ruby-saml) gem allows to integrate a SAML single sign on strategy.
@@ -70,16 +57,16 @@ The SAML integration is fully defined in the config/initializers/omniauth.rb fil
 ```ruby
   Devise.setup do |config|
     config.omniauth :saml,
-                    idp_cert: Chamber.env.saml.idp_cert,
-                    idp_sso_target_url: Chamber.env.saml.idp_sso_target_url,
-                    sp_entity_id: Chamber.env.saml.sp_entity_id,
+                    idp_cert: ENV["SAML_IDP_CERT"],
+                    idp_sso_target_url: ENV["SAML_IDP_SSO_TARGET_URL"],
+                    sp_entity_id: ENV["SAML_SP_ENTITY_ID"],
                     strategy_class: ::OmniAuth::Strategies::SAML,
                     attribute_statements: {
                       email: ['mail'],
                       name: ['givenName', 'nom']
                     },
-                    certificate: Chamber.env.saml.certificate,
-                    private_key: Chamber.env.saml.private_key,
+                    certificate: ENV["SAML_CERTIFICATE"],
+                    private_key: ENV["SAML_PRIVATE_KEY"],
                     security: {
                       authn_requests_signed: true,
                       signature_method: XMLSecurity::Document::RSA_SHA256

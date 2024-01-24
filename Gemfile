@@ -7,7 +7,6 @@ ruby RUBY_VERSION
 DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "release/0.26-stable" }.freeze
 
 gem "activerecord-session_store"
-gem "chamber", "~> 2.12.1"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-consultations", DECIDIM_VERSION
@@ -51,4 +50,8 @@ group :development do
   gem "spring", "~> 2.0"
   gem "spring-watcher-listen", "~> 2.0"
   gem "web-console", "~> 3.5"
+end
+
+group :production do
+  gem "figaro", "~> 1.2"
 end

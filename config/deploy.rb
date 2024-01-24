@@ -10,7 +10,7 @@ set :repo_url, "https://github.com/AjuntamentdeBarcelona/aytobarcelona-internos.
 set :deploy_to, -> { "/home/#{fetch(:user)}/app" }
 set :keep_releases, 5
 
-set :linked_files, fetch(:linked_files, []).push("config/database.yml", "config/chamber.pem")
+set :linked_files, fetch(:linked_files, []).push("config/database.yml", "config/application.yml")
 set :linked_dirs, fetch(:linked_dirs, []).push("log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads",
                                                "storage", "tmp/webpacker-cache", "node_modules", "public/decidim-packs")
 
@@ -41,14 +41,6 @@ set :locals_rails_env, "development"
 set :passenger_restart_with_touch, true
 
 namespace :deploy do
-  desc "Create chamber.pem symlink"
-  task :create_symlink do
-    on roles(:app) do
-      # Asegurar que shared path y latest release tienen valor/existen
-      execute "ln -s #{shared_path}/config/chamber.pem #{release_path}/.chamber.pem"
-    end
-  end
-
   desc "Decidim webpacker configuration"
   task :decidim_webpacker_install do
     on roles(:all) do
@@ -60,5 +52,3 @@ namespace :deploy do
 
   before "deploy:assets:precompile", "deploy:decidim_webpacker_install"
 end
-
-after "bundler:install", "deploy:create_symlink"
