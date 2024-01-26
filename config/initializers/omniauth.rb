@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+OmniAuth.config.allowed_request_methods = [:post, :get]
+
 if Rails.application.secrets.dig(:omniauth, :imipre, :enabled)
   module OmniAuth
     module Strategies
