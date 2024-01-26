@@ -21,6 +21,7 @@ require 'capistrano/deploy'
 # require 'capistrano/rails/migrations'
 
 require 'capistrano/rbenv'
+require 'capistrano/nvm'
 require 'capistrano/rails'
 require 'capistrano-db-tasks'
 require 'airbrussh/capistrano'

@@ -6,6 +6,10 @@ lock "3.3.5"
 set :rbenv_type, :user # or :system, depends on your rbenv setup
 set :rbenv_ruby, "2.7.3"
 
+set :nvm_type, :user # or :system, depends on your nvm setup
+set :nvm_node, "v16.9.1"
+set :nvm_map_bins, %w(node npm yarn rake)
+
 set :application, "internos"
 set :user, "aytobarcelonadecidim"
 set :repo_url, "https://github.com/AjuntamentdeBarcelona/aytobarcelona-internos.git"

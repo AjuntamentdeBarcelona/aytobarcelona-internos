@@ -42,6 +42,7 @@ group :development do
   gem "capistrano-bundler", "~> 1.2"
   gem "capistrano-db-tasks", require: false
   gem "capistrano-faster-assets", "~> 1.0"
+  gem "capistrano-nvm"
   gem "capistrano-passenger"
   gem "capistrano-rails"
   gem "capistrano-rbenv"
