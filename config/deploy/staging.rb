@@ -11,7 +11,7 @@ role :web, %w(decidim-intern-pre.ajbcn.coditramuntana.cat)
 role :db, %w(decidim-intern-pre.ajbcn.coditramuntana.cat)
 
 set :app_env, "master" # Name used in rollbar/hipchat, etc
-set :branch, fetch(:app_env) # Git branch deployed
+set :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :instance, "staging" # Deploy extra files from script/deploy/<instance>
 set :bundle_without, %w(development test).join(" ")
 

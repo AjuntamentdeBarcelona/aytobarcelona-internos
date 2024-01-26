@@ -44,6 +44,7 @@ group :development do
   gem "capistrano-faster-assets", "~> 1.0"
   gem "capistrano-passenger"
   gem "capistrano-rails"
+  gem "capistrano-rbenv"
   gem "letter_opener_web", "~> 1.3"
   gem "listen", "~> 3.1"
   gem "rubocop-faker"
