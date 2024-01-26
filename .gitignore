@@ -42,6 +42,7 @@ config/*-development.yml
 .rspec
 .rspec-failures
 
+/public/decidim-packs
 /public/packs
 /public/packs-test
 yarn-debug.log*
