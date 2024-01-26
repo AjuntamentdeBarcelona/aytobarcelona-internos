@@ -1,25 +1,28 @@
-# internos
+# aytobarcelona-internos
+
+[![[CI] Lint](https://github.com/AjuntamentdeBarcelona/aytobarcelona-internos/actions/workflows/lint.yml/badge.svg)](https://github.com/AjuntamentdeBarcelona/aytobarcelona-internos/actions/workflows/lint.yml)
+[![[CI] Test](https://github.com/AjuntamentdeBarcelona/aytobarcelona-internos/actions/workflows/test.yml/badge.svg)](https://github.com/AjuntamentdeBarcelona/aytobarcelona-internos/actions/workflows/test.yml)
 
 Free Open-Source participatory democracy, citizen participation and open government for cities and organizations
 
-This is the open-source repository for borrame, based on [Decidim](https://github.com/decidim/decidim).
+This is the open-source repository for aytobarcelona-internos, based on [Decidim](https://github.com/decidim/decidim).
 
 ## Setting up the application
 
 You will need to do some steps before having the app working properly once you've deployed it:
 
 1. Open a Rails console in the server: `bundle exec rails console`
-1. Create a System Admin user:
+2. Create a System Admin user:
 
-  ```ruby
-  user = Decidim::System::Admin.new(email: <email>, password: <password>, password_confirmation: <password>)
-  user.save!
-  ```
+```ruby
+user = Decidim::System::Admin.new(email: <email>, password: <password>, password_confirmation: <password>)
+user.save!
+```
 
-1. Visit `<your app url>/system` and login with your system admin credentials
-1. Create a new organization. Check the locales you want to use for that organization, and select a default locale.
-1. Set the correct default host for the organization, otherwise the app will not work properly. Note that you need to include any subdomain you might be using.
-1. Fill the rest of the form and submit it.
+3. Visit `<your app url>/system` and login with your system admin credentials
+4. Create a new organization. Check the locales you want to use for that organization, and select a default locale.
+5. Set the correct default host for the organization, otherwise the app will not work properly. Note that you need to include any subdomain you might be using.
+6. Fill the rest of the form and submit it.
 
 You're good to go!
 
@@ -35,8 +38,8 @@ It uses the IDP endpoint url and it generates a local route to the metadata endp
 This integration does not replace the previous oauth one. The oauth authentication can still be used, but is disabled in favor of SAML.
 You can still use the previous oauth authentication strategy just enabling it in the settings, and disabling the SAML one.
 
-- the IDP endpoint url is provided by the SAML provider and set in the config files
-- the local metadata url is: /users/auth/saml/metadata
+- The IDP endpoint url is provided by the SAML provider and set in the config files
+- The local metadata url is: `/users/auth/saml/metadata`
 
 Mapped attributes:
 
@@ -74,19 +77,19 @@ The SAML integration is fully defined in the config/initializers/omniauth.rb fil
   end
 ```
 
-- idp_cert: is the certificate provided by the IDP provider
-- idp_sso_target_url: is the url provided by the IDP
-- sp_entity_id: is just a identifier to set in the saml response:
+- `idp_cert`: is the certificate provided by the IDP provider
+- `idp_sso_target_url`: is the url provided by the IDP
+- `sp_entity_id`: is just a identifier to set in the saml response:
 
   ```html
     <md:EntityDescriptor xmlns:md="..." xmlns:saml="..." ID="..." entityID="https://decidim.ajuntament.bcn/">
   ```
 
-- attribute_statements: Custom attribute mappings
-- certificate: Certificate used to sign request to the SAML server
-- private_key: Used to sign request to the SAML server
+- `attribute_statements`: Custom attribute mappings
+- `certificate`: Certificate used to sign request to the SAML server
+- `private_key`: Used to sign request to the SAML server
 
-This configuration is set in the config/settings.yml file:
+This configuration is set in the `config/settings.yml` file:
 
 ```ruby
   saml:
@@ -105,55 +108,55 @@ When the external SAML system authenticates the user it invokes the `Devise::Omn
 
 This verification checks that the user belongs to a `valid_cn?` (for admins) **or** belongs to a `valid_type?` (currently `['T1', 'T2', 'T3', 'T11']`).
 
-## Carga de usuarios de IMIPRE
+## Load IMIPRE users
 
-Para cargar la csv hay que:
+To load the users from IMIPRE from a CSV you need to:
 
-1. meterla dentro de la carpeta tmp con el nombre employees.csv
-1. ejecutar bundle exec rake employees:load
+1. Include the CSV file in the tmp folder with the name `employees.csv`
+2. Execute `bundle exec rake employees:load`
 
-Al autenticar con OAUTH comprueba que los campos del csv tengan el estado activo y el tipo T1
+When authenticating with OAUTH it checks that the user is active and has the type T1.
 
-Ejemplo de csv:
+Example of CSV file:
 
 ```csv
 Matricula;Cognoms;Nom;mail;Estat;Tipus d'Empleat
 DXXXXXX;Sanchez Inclan ;Manuel;msinclan@bcn.cat;ACTIVE;T1
 ```
 
-## Borrado de respuesta a una encuesta de un usuario
+## Remove survey answer from a user
 
-Para obtener el usuario:
+Get the user:
 
 ```ruby
 u = Decidim::User.where(email: Employee.where(code: 'B611460').first.email).first
 ```
 
-Para poder ver el nombre de las encuestas que hay:
+Get the name of the surveys:
 
 ```ruby
 Decidim::Surveys::Survey.all.map(&:component)
 ```
 
-te quedas con el id del component que se corresponda con la encuesta y obtienes la encuesta
+Get the id of the component that corresponds to the survey and get the survey:
 
 ```ruby
 s = Decidim::Surveys::Survey.where(decidim_component_id: 5).last
 ```
 
-Obtienes el cuestionario de la encuesta:
+Get the questionnaire of the survey:
 
 ```ruby
 q = Decidim::Forms::Questionnaire.includes(:questionnaire_for).where(questionnaire_for: s)
 ```
 
-Y obtienes las respuestas al cuestionario del usuario
+Get the answers of the user:
 
 ```ruby
 a = Decidim::Forms::Answer.joins(:questionnaire).where(questionnaire: q).where(decidim_user_id: u.id)
 ```
 
-finalmente se borran las respuestas:
+Remove the answers:
 
 ```ruby
 a.destroy_all
