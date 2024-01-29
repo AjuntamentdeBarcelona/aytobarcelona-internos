@@ -18,17 +18,11 @@ if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
                     idp_cert: Rails.application.secrets.dig(:omniauth, :saml, :idp_cert),
                     idp_sso_target_url: Rails.application.secrets.dig(:omniauth, :saml, :idp_sso_target_url),
                     sp_entity_id: Rails.application.secrets.dig(:omniauth, :saml, :sp_entity_id),
-                    strategy_class: ::OmniAuth::Strategies::SAML,
-                    attribute_statements: {
-                      email: ["mail"],
-                      name: %w(givenName nom)
-                    },
+                    strategy_class: Rails.application.secrets.dig(:omniauth, :saml, :strategy_class).constantize,
+                    attribute_statements: Rails.application.secrets.dig(:omniauth, :saml, :attribute_statements),
                     certificate: Rails.application.secrets.dig(:omniauth, :saml, :certificate),
                     private_key: Rails.application.secrets.dig(:omniauth, :saml, :private_key),
-                    security: {
-                      authn_requests_signed: true,
-                      signature_method: XMLSecurity::Document::RSA_SHA256
-                    }
+                    security: Rails.application.secrets.dig(:omniauth, :saml, :security)
   end
 
   Devise::OmniauthCallbacksController.class_eval do
