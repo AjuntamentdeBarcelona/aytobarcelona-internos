@@ -1,6 +1,12 @@
-require_relative 'boot'
+# frozen_string_literal: true
 
-require 'rails/all'
+require_relative "boot"
+
+require "decidim/rails"
+# Add the frameworks used by your app that are not loaded by Decidim.
+# require "action_cable/engine"
+# require "action_mailbox/engine"
+# require "action_text/engine"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -15,22 +21,5 @@ module Internos
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-
-    # Load chamber settings because we use it in this file
-    Chamber.load files: [Rails.root + 'config/settings.yml', Rails.root + 'config/settings/**/*.{yml,yml.erb}'],
-                 decryption_key: Rails.root + 'config/chamber.pem',
-                 namespaces: {
-                   environment: -> { ::Rails.env },
-                   hostname:    -> { Socket.gethostname } }
-    # We need to initialize before load_environment_config because railties initialize it before config with default
-    # parameters.
-    initializer 'internos.chamber.load', before: :load_environment_config do
-      Chamber.load files: [Rails.root + 'config/settings.yml', Rails.root + 'config/settings/**/*.{yml,yml.erb}'],
-                   decryption_key: Rails.root + 'config/chamber.pem',
-                   namespaces: {
-                     environment: -> { ::Rails.env },
-                     hostname:    -> { Socket.gethostname } }
-    end
-
   end
 end

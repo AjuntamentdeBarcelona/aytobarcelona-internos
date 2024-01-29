@@ -1,5 +1,41 @@
 {
-  "name": "internos",
+  "name": "app",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@decidim/browserslist-config": "^0.26.9",
+    "@decidim/core": "^0.26.9",
+    "@decidim/elections": "^0.26.9",
+    "@decidim/webpacker": "^0.26.9"
+  },
+  "version": "0.1.0",
+  "babel": {
+    "presets": [
+      "./node_modules/@rails/webpacker/package/babel/preset.js"
+    ]
+  },
+  "browserslist": [
+    "extends @decidim/browserslist-config"
+  ],
+  "scripts": {
+    "lint": "eslint -c .eslintrc.json --ext .js app/packs/src",
+    "lint-fix": "eslint -c .eslintrc.json --ext .js app/packs/src --fix",
+    "stylelint": "stylelint app/packs/stylesheets/**/*.scss",
+    "stylelint-fix": "stylelint app/packs/stylesheets/**/*.scss --fix"
+  },
+  "stylelint": {
+    "extends": "@decidim/stylelint-config",
+    "rules": {
+      "block-opening-brace-space-before": "always"
+    }
+  },
+  "devDependencies": {
+    "@decidim/dev": "^0.26.9",
+    "@decidim/eslint-config": "^0.26.9",
+    "@decidim/stylelint-config": "^0.26.9",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "stylelint": "^13.11.0"
+  }
 }

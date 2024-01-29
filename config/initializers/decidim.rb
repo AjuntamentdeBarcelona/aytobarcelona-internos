@@ -1,18 +1,23 @@
 # frozen_string_literal: true
 
 Decidim.configure do |config|
-  config.application_name = 'Decidim Ajuntament de Barcelona'
-  config.mailer_sender = 'svc_decidim@bcn.cat'
+  config.application_name = "Decidim Ajuntament de Barcelona"
+  config.mailer_sender = "svc_decidim@bcn.cat"
 
   # Change these lines to set your preferred locales
   config.default_locale = :ca
-  config.available_locales = %i[ca]
+  config.available_locales = [:ca]
 
   # Geocoder configuration
-  if Rails.application.secrets.geocoder
+  if Rails.application.secrets.maps
+    config.maps = {
+      provider: :here,
+      api_key: Rails.application.secrets.maps[:api_key],
+      static: { url: "https://image.maps.ls.hereapi.com/mia/1.6/mapview" }
+    }
     config.geocoder = {
-    static_map_url: "https://image.maps.ls.hereapi.com/mia/1.6/mapview",
-    here_api_key: Rails.application.secrets.geocoder[:here_api_key]
+      timeout: 5,
+      units: :km
     }
   end
 
@@ -23,7 +28,7 @@ Decidim.configure do |config|
   # end
 
   # Currency unit
-  config.currency_unit = '€'
+  config.currency_unit = "€"
 
   # The number of reports which an object can receive before hiding it
   # config.max_reports_before_hiding = 3
@@ -46,3 +51,5 @@ end
 
 Rails.application.config.i18n.available_locales = Decidim.available_locales
 Rails.application.config.i18n.default_locale = Decidim.default_locale
+
+Decidim.register_assets_path File.expand_path("app/packs", Rails.application.root)

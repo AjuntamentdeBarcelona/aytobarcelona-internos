@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -19,14 +21,14 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every :sunday, at: '4:00 am' do
+every :sunday, at: "4:00 am" do
   rake "decidim:delete_data_portability_files"
 end
 
-every 1.day, at: '2:00 am' do
+every 1.day, at: "2:00 am" do
   rake "decidim:metrics:all"
 end
 
-every 1.day, at: '4:00 am' do
+every 1.day, at: "4:00 am" do
   rake "decidim:open_data:export"
 end

@@ -2,7 +2,8 @@
 
 require "rails_helper"
 
-feature "new registration" do
+# rubocop:disable RSpec/DescribeClass
+describe "new registration" do
   let(:organization) { create :organization }
 
   before do
@@ -10,13 +11,14 @@ feature "new registration" do
     Capybara.app_host = app_host
   end
 
-  scenario "display feder logo on footer on homepage" do
-    visit '/'
+  it "display feder logo on footer on homepage" do
+    visit "/"
     expect(page).to have_content "Fons Europeu de Desenvolupament Regional"
   end
 
-  scenario "display feder logo on footer on user registration page" do
-    visit '/users/sign_up'
+  it "display feder logo on footer on user registration page" do
+    visit "/users/sign_up"
     expect(page).to have_content "Fons Europeu de Desenvolupament Regional"
   end
 end
+# rubocop:enable RSpec/DescribeClass
