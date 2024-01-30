@@ -21,7 +21,7 @@ module OmniAuth
       end
 
       def build_access_token
-        options.token_params.merge!(headers: { 'X-OAUTH-IDENTITY-DOMAIN-NAME': Rails.application.secrets.dig(:omniauth, :imipre, :domain) })
+        options.token_params.merge!(headers: { "X-OAUTH-IDENTITY-DOMAIN-NAME": Rails.application.secrets.dig(:omniauth, :imipre, :domain) })
         super
       end
 
@@ -53,7 +53,7 @@ module OmniAuth
       def raw_info
         access_token.options[:mode] = :query
         @raw_info ||= access_token.get(Rails.application.secrets.dig(:omniauth, :imipre, :info_url),
-                                       { headers: { 'X-OAUTH-IDENTITY-DOMAIN-NAME': Rails.application.secrets.dig(:omniauth, :imipre, :domain) } }).parsed
+                                       { headers: { "X-OAUTH-IDENTITY-DOMAIN-NAME": Rails.application.secrets.dig(:omniauth, :imipre, :domain) } }).parsed
       end
 
       # https://github.com/intridea/omniauth-oauth2/issues/81

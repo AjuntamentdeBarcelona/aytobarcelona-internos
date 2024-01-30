@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # config valid only for current version of Capistrano
-lock "3.3.5"
+lock "3.17.3"
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup
-set :rbenv_ruby, "2.7.3"
+set :rbenv_ruby, "3.0.6"
 
 set :nvm_type, :user # or :system, depends on your nvm setup
 set :nvm_node, "v16.9.1"
@@ -33,17 +33,7 @@ set :ssh_options, lambda {
 }
 
 set :rails_env, "production"
-set :scm, :git
 set :log_level, :info
-
-# capistrano-db-tasks related
-# if you want to remove the dump file after loading
-set :db_local_clean, true
-# If you want to import assets, you can change default asset dir (default = system)
-# This directory must be in your shared directory on the server
-set :assets_dir, %w(public/assets)
-# if you want to work on a specific local environment (default = ENV['RAILS_ENV'] || 'development')
-set :locals_rails_env, "development"
 
 set :passenger_restart_with_touch, true
 

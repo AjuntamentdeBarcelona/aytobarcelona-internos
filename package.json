@@ -2,10 +2,10 @@
   "name": "app",
   "private": true,
   "dependencies": {
-    "@decidim/browserslist-config": "^0.26.9",
-    "@decidim/core": "^0.26.9",
-    "@decidim/elections": "^0.26.9",
-    "@decidim/webpacker": "^0.26.9"
+    "@decidim/browserslist-config": "^0.27.5",
+    "@decidim/core": "^0.27.5",
+    "@decidim/elections": "^0.27.5",
+    "@decidim/webpacker": "^0.27.5"
   },
   "version": "0.1.0",
   "babel": {
@@ -29,13 +29,18 @@
     }
   },
   "devDependencies": {
-    "@decidim/dev": "^0.26.9",
-    "@decidim/eslint-config": "^0.26.9",
-    "@decidim/stylelint-config": "^0.26.9",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@decidim/dev": "^0.27.5",
+    "@decidim/eslint-config": "^0.27.5",
+    "@decidim/stylelint-config": "^0.27.5",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.27.5",
-    "stylelint": "^13.11.0"
+    "eslint-plugin-react": "^7.33.2",
+    "stylelint": "^13.11.0",
+    "webpack-dev-server": "^4.15.1"
   }
 }

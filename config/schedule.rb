@@ -22,7 +22,7 @@
 # Learn more: http://github.com/javan/whenever
 
 every :sunday, at: "4:00 am" do
-  rake "decidim:delete_data_portability_files"
+  rake "decidim:delete_download_your_data_files"
 end
 
 every 1.day, at: "2:00 am" do
