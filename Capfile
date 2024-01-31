@@ -4,6 +4,9 @@ require 'capistrano/setup'
 # Include default deployment tasks
 require 'capistrano/deploy'
 
+require "capistrano/scm/git"
+install_plugin Capistrano::SCM::Git
+
 # Include tasks from other gems included in your Gemfile
 #
 # For documentation on these, see for example:
@@ -23,8 +26,6 @@ require 'capistrano/deploy'
 require 'capistrano/rbenv'
 require 'capistrano/nvm'
 require 'capistrano/rails'
-require 'capistrano-db-tasks'
-require 'airbrussh/capistrano'
 require 'capistrano/bundler'
 require 'capistrano/passenger'
 require 'capistrano/delayed_job'

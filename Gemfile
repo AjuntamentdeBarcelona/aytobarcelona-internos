@@ -4,14 +4,14 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "release/0.26-stable" }.freeze
-
-gem "activerecord-session_store"
+DECIDIM_VERSION = "0.27.5"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-consultations", DECIDIM_VERSION
-gem "decidim-direct_verifications", "~> 1.2.0"
-gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer", branch: "release/0.26-stable"
+
+gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "release/0.27-stable"
+gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer", branch: "release/0.27-stable"
+
 gem "omniauth-saml", "~> 2.0"
 
 # Metrics require a queue system and a daily cron
@@ -22,36 +22,36 @@ gem "whenever", require: false
 
 gem "bootsnap", "~> 1.3"
 
-gem "puma", "~> 5.0"
-gem "uglifier", "~> 4.1"
+gem "puma", ">= 5.0.0"
 
-gem "deface"
-gem "httplog"
+gem "faker", "~> 2.14"
+
+gem "wicked_pdf", "~> 2.1"
+
+gem "deface", "~> 1.9"
 
 group :development, :test do
-  gem "byebug", platform: :mri
+  gem "byebug", "~> 11.0", platform: :mri
+  gem "rubocop-faker"
+
+  gem "brakeman"
   gem "decidim-dev", DECIDIM_VERSION
-  gem "faker", "~> 2.14"
-  gem "rspec-rails"
 end
 
 group :development do
-  gem "airbrussh", require: false
-  gem "capistrano", "3.3.5"
+  gem "letter_opener_web", "~> 2.0"
+  gem "listen", "~> 3.1"
+  gem "spring", "~> 2.0"
+  gem "spring-watcher-listen", "~> 2.0"
+  gem "web-console", "~> 4.2"
+
+  gem "capistrano", "~> 3.14"
   gem "capistrano3-delayed-job", "~> 1.0"
   gem "capistrano-bundler", "~> 1.2"
-  gem "capistrano-db-tasks", require: false
-  gem "capistrano-faster-assets", "~> 1.0"
   gem "capistrano-nvm"
   gem "capistrano-passenger"
   gem "capistrano-rails"
   gem "capistrano-rbenv"
-  gem "letter_opener_web", "~> 1.3"
-  gem "listen", "~> 3.1"
-  gem "rubocop-faker"
-  gem "spring", "~> 2.0"
-  gem "spring-watcher-listen", "~> 2.0"
-  gem "web-console", "~> 3.5"
 end
 
 group :production do
