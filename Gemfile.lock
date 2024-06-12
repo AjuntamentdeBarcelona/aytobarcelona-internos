@@ -300,6 +300,11 @@ GEM
     decidim-debates (0.27.5)
       decidim-comments (= 0.27.5)
       decidim-core (= 0.27.5)
+    decidim-decidim_awesome (0.10.2)
+      decidim-admin (>= 0.26.0, < 0.28)
+      decidim-core (>= 0.26.0, < 0.28)
+      deface (>= 1.5)
+      sassc (~> 2.3)
     decidim-dev (0.27.5)
       axe-core-rspec (~> 4.1.0)
       byebug (~> 11.0)
@@ -769,6 +774,8 @@ GEM
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -884,6 +891,7 @@ DEPENDENCIES
   daemons
   decidim (= 0.27.5)
   decidim-consultations (= 0.27.5)
+  decidim-decidim_awesome (~> 0.10.2)
   decidim-dev (= 0.27.5)
   decidim-direct_verifications!
   decidim-term_customizer!
