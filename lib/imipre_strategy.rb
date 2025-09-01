@@ -66,10 +66,10 @@ module OmniAuth
       def authorize_url
         @authorize_url ||= URI.join(
           options.site,
-          "/oauth2/rest/authz?response_type=code"\
-          "&client_id=#{options.client_id}"\
-          "&domain=#{Rails.application.secrets.dig(:omniauth, :imipre, :domain)}"\
-          "&scope=#{Rails.application.secrets.dig(:omniauth, :imipre, :scope)}"\
+          "/oauth2/rest/authz?response_type=code" \
+          "&client_id=#{options.client_id}" \
+          "&domain=#{Rails.application.secrets.dig(:omniauth, :imipre, :domain)}" \
+          "&scope=#{Rails.application.secrets.dig(:omniauth, :imipre, :scope)}" \
           "&redirect_uri=#{Rails.application.secrets.dig(:omniauth, :imipre, :redirect_uri)}"
         ).to_s
       end

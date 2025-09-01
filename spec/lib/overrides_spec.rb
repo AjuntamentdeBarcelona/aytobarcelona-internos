@@ -12,20 +12,24 @@ checksums = [
       # The only change for controllers is the full namespace for the parent class as it didn't resolved it well when it
       # was just ApplicationController
       "/app/controllers/decidim/direct_verifications/verification/admin/authorizations_controller.rb" => "5b713aa72da2ba5e4f0fefa840816004",
-      "/app/controllers/decidim/direct_verifications/verification/admin/direct_verifications_controller.rb" => "4f9cef25f72bb5ce88480850bd3f162a",
-      "/app/controllers/decidim/direct_verifications/verification/admin/imports_controller.rb" => "477a63f3c749de204ccdc0987cd6b20d",
+      "/app/controllers/decidim/direct_verifications/verification/admin/direct_verifications_controller.rb" => "dfe29d5353030989c07866d37b794157",
+      "/app/controllers/decidim/direct_verifications/verification/admin/imports_controller.rb" => "43852a21a6aca14404c2959bb70bdb19",
       "/app/controllers/decidim/direct_verifications/verification/admin/stats_controller.rb" => "a0c4ae48b1372ea5d37aae0112c9c826",
-      "/app/controllers/decidim/direct_verifications/verification/admin/user_authorizations_controller.rb" => "c0f3387a8b76ecdf238e12e6c03daf3e"
+      "/app/controllers/decidim/direct_verifications/verification/admin/user_authorizations_controller.rb" => "705d2ef9a0c33ad68899b28c4b1dc42d"
+    }
+  },
+  {
+    package: "decidim-core",
+    files: {
+      # Deface footer override to add feder logo
+      "/app/views/layouts/decidim/footer/_main.html.erb" => "86e880bb7751c32efbb53fadec653454"
     }
   }
 ]
 
 describe "Overriden files", type: :view do
   checksums.each do |item|
-    # rubocop:disable Rails/DynamicFindBy
-    spec = ::Gem::Specification.find_by_name(item[:package])
-    # rubocop:enable Rails/DynamicFindBy
-
+    spec = Gem::Specification.find_by_name(item[:package])
     item[:files].each do |file, signature|
       it "#{spec.gem_dir}#{file} matches checksum" do
         expect(md5("#{spec.gem_dir}#{file}")).to eq(signature)
