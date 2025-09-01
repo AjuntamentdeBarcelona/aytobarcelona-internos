@@ -1,0 +1,13 @@
+<!-- insert_before ".main-footer" -->
+<section class="footer home__section pt-12">
+  <div class="flex justify-between">
+    <div class="flex text items-center">
+      <%= t("feder.text") %>
+    </div>
+    <div class="logo">
+      <%= link_to t("feder.url") do %>
+        <%= image_pack_tag "media/images/feder-logo.png", alt: "FEDER" %>
+      <% end %>
+    </div>
+  </div>
+</section>

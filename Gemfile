@@ -4,14 +4,13 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.27.5"
+DECIDIM_VERSION = "0.28.6"
 
 gem "decidim", DECIDIM_VERSION
-gem "decidim-consultations", DECIDIM_VERSION
 
-gem "decidim-decidim_awesome", "~> 0.10.2"
-gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "release/0.27-stable"
-gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer", branch: "release/0.27-stable"
+gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: "release/0.28-stable"
+gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "release/0.28-stable"
+# gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer", branch: "release/0.27-stable"
 
 gem "omniauth-saml", "~> 2.0"
 
@@ -25,7 +24,7 @@ gem "bootsnap", "~> 1.3"
 
 gem "puma", ">= 5.0.0"
 
-gem "faker", "~> 2.14"
+gem "faker"
 
 gem "wicked_pdf", "~> 2.1"
 
@@ -42,8 +41,6 @@ end
 group :development do
   gem "letter_opener_web", "~> 2.0"
   gem "listen", "~> 3.1"
-  gem "spring", "~> 2.0"
-  gem "spring-watcher-listen", "~> 2.0"
   gem "web-console", "~> 4.2"
 
   gem "capistrano", "~> 3.14"
