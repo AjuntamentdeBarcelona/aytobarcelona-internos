@@ -22,7 +22,7 @@ checksums = [
     package: "decidim-core",
     files: {
       # Deface footer override to add feder logo
-      "/app/views/layouts/decidim/footer/_main.html.erb" => "86e880bb7751c32efbb53fadec653454"
+      "/app/views/layouts/decidim/footer/_main.html.erb" => "b22323d9508fa8a14bd669d665a04634"
     }
   },
   {
