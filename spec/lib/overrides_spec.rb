@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-# We make sure that the checksum of the file overriden is the same
-# as the expected. If this test fails, it means that the overriden
+# We make sure that the checksum of the file overridden is the same
+# as the expected. If this test fails, it means that the overridden
 # file should be updated to match any change/bug fix introduced in the core
 checksums = [
   {
@@ -24,10 +24,18 @@ checksums = [
       # Deface footer override to add feder logo
       "/app/views/layouts/decidim/footer/_main.html.erb" => "86e880bb7751c32efbb53fadec653454"
     }
+  },
+  {
+    package: "decidim-proposals",
+    files: {
+      # Update proposal title size
+      "/app/forms/decidim/proposals/admin/proposal_form.rb" => "ad4ff4bde6ee2e802d394382ef7859a4",
+      "/app/forms/decidim/proposals/proposal_form.rb" => "0b19bfeb4f7bd15cd378a69c3935de6b"
+    }
   }
 ]
 
-describe "Overriden files", type: :view do
+describe "Overridden files", type: :view do
   checksums.each do |item|
     spec = Gem::Specification.find_by_name(item[:package])
     item[:files].each do |file, signature|
