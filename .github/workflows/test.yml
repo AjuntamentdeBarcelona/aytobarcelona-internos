@@ -51,6 +51,9 @@ jobs:
         with:
           chrome-version: 119.0.6045.105
 
+      - run: |
+          sudo apt update && sudo apt install imagemagick wkhtmltopdf
+
       - name: Bundle Install
         run: bundle install
 
