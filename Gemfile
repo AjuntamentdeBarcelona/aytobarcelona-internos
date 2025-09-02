@@ -4,13 +4,13 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.28.6"
+DECIDIM_VERSION = "~> 0.29.4"
 
 gem "decidim", DECIDIM_VERSION
 
-gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: "release/0.28-stable"
-gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "release/0.28-stable"
-# gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer", branch: "release/0.27-stable"
+gem "decidim-decidim_awesome", "~> 0.12.3"
+gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "release/0.29-stable"
+gem "decidim-term_customizer", git: "https://github.com/openpoke/decidim-module-term_customizer", branch: "main"
 
 gem "omniauth-saml", "~> 2.0"
 
