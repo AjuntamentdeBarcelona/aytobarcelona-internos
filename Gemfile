@@ -32,6 +32,7 @@ gem "deface", "~> 1.9"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
+  gem "mdl"
   gem "rubocop-faker"
 
   gem "brakeman"
