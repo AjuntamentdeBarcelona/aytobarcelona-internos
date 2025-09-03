@@ -4,10 +4,10 @@
 lock "3.17.3"
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup
-set :rbenv_ruby, "3.0.6"
+set :rbenv_ruby, "3.2.6"
 
 set :nvm_type, :user # or :system, depends on your nvm setup
-set :nvm_node, "v16.9.1"
+set :nvm_node, "18.17.1"
 set :nvm_map_bins, %w(node npm yarn rake)
 
 set :application, "internos"
