@@ -25,35 +25,37 @@ if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
                     security: Rails.application.secrets.dig(:omniauth, :saml, :security)
   end
 
-  Devise::OmniauthCallbacksController.class_eval do
-    skip_before_action :verify_authenticity_token
+  Rails.application.config.to_prepare do
+    Devise::OmniauthCallbacksController.class_eval do
+      skip_before_action :verify_authenticity_token
 
-    before_action :verify_user_type, only: :saml
+      before_action :verify_user_type, only: :saml
 
-    def verify_user_type
-      saml_response = OneLogin::RubySaml::Response.new(params["SAMLResponse"])
-      unless valid_user?(saml_response)
-        flash[:error] = I18n.t("devise.failure.invalid_user_type")
-        redirect_to root_path
+      def verify_user_type
+        saml_response = OneLogin::RubySaml::Response.new(params["SAMLResponse"])
+        unless valid_user?(saml_response)
+          flash[:error] = I18n.t("devise.failure.invalid_user_type")
+          redirect_to root_path
+        end
       end
-    end
 
-    private
+      private
 
-    def valid_user?(response)
-      valid_cn?(response.attributes.multi(:ACL)) || valid_type?(response.attributes.multi(:tipusUsuari))
-    end
+      def valid_user?(response)
+        valid_cn?(response.attributes.multi(:ACL)) || valid_type?(response.attributes.multi(:tipusUsuari))
+      end
 
-    # ACL starting with `cn=ACCES` mean that the user is an admin.
-    # The user should be allowed whatever its type.
-    def valid_cn?(acl_list)
-      # Sometimes we receive "ACCES" and some times "ACCESS" so we use
-      # a regexp with the shorter one.
-      acl_list.any? { |acl| /cn=#{Rails.application.secrets.dig(:omniauth, :saml, :cn)}(,|\b)/i.match? acl }
-    end
+      # ACL starting with `cn=ACCES` mean that the user is an admin.
+      # The user should be allowed whatever its type.
+      def valid_cn?(acl_list)
+        # Sometimes we receive "ACCES" and some times "ACCESS" so we use
+        # a regexp with the shorter one.
+        acl_list.any? { |acl| /cn=#{Rails.application.secrets.dig(:omniauth, :saml, :cn)}(,|\b)/i.match? acl }
+      end
 
-    def valid_type?(type_list)
-      type_list.any? { |type| type.in? Rails.application.secrets.dig(:omniauth, :saml, :user_types) }
+      def valid_type?(type_list)
+        type_list.any? { |type| type.in? Rails.application.secrets.dig(:omniauth, :saml, :user_types) }
+      end
     end
   end
 
