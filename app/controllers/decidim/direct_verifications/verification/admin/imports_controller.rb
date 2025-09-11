@@ -25,7 +25,7 @@ module Decidim
               end
 
               on(:invalid) do
-                flash[:alert] = t(".error")
+                flash.now[:alert] = t(".error")
               end
             end
 
