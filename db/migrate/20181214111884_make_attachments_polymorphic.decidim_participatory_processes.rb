@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-# This migration comes from decidim_participatory_processes (originally 20170123134023)
 
+# This migration comes from decidim_participatory_processes (originally 20170123134023)
+# This file has been modified by `decidim upgrade:migrations` task on 2025-09-11 14:52:48 UTC
 class MakeAttachmentsPolymorphic < ActiveRecord::Migration[5.0]
   def change
     transaction do
