@@ -29,8 +29,8 @@ checksums = [
     package: "decidim-proposals",
     files: {
       # Update proposal title size
-      "/app/forms/decidim/proposals/admin/proposal_form.rb" => "ad4ff4bde6ee2e802d394382ef7859a4",
-      "/app/forms/decidim/proposals/proposal_form.rb" => "0b19bfeb4f7bd15cd378a69c3935de6b"
+      "/app/forms/decidim/proposals/admin/proposal_form.rb" => "34e42ec6c9911b60c28d2bb49f066a8c",
+      "/app/forms/decidim/proposals/proposal_form.rb" => "8db839481fec2a53acecabbf22377aa6"
     }
   }
 ]
