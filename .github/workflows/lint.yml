@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 3.2.6
+  RUBY_VERSION: 3.3.4
   NODE_VERSION: 18.17
 
 jobs:
@@ -33,7 +33,7 @@ jobs:
 
       - run: bundle exec rubocop -P
         name: Lint Ruby files
-      
+
       - run: bundle exec erblint app/{overrides,views}/**/*.{erb,deface}
         name: Lint ERB files
 

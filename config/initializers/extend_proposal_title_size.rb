@@ -8,7 +8,7 @@ Rails.application.configure do
       .instance_variable_set(:@options, { minimum: 15, maximum: 250 })
     Decidim.available_locales.each do |locale|
       Decidim::Proposals::Admin::ProposalForm
-        .validators_on("title_#{locale}".to_sym).find { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }
+        .validators_on(:"title_#{locale}").find { |v| v.is_a?(ProposalLengthValidator) }
         .instance_variable_set(:@options, { minimum: 15, maximum: 250 })
     end
   end

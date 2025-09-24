@@ -4,7 +4,7 @@
 lock "3.19.2"
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup
-set :rbenv_ruby, "3.2.6"
+set :rbenv_ruby, "3.3.4"
 
 set :nvm_type, :user # or :system, depends on your nvm setup
 set :nvm_node, "v18.17.1"
