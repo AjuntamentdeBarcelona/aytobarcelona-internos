@@ -39,7 +39,7 @@ The [omniauth-keycloak](https://github.com/ccrockett/omniauth-keycloak) gem allo
 
 When the external system authenticates the user it invokes the `Devise::OmniauthCallbacksController#keycloakopenid` callback. This callback is overridden to have a `before_action :verify_user_type, only: :keycloakopenid`.
 
-This verification checks that the user belongs to a `valid_cn?` (for admins) **or** belongs to a `valid_type?` (currently `['T1', 'T2', 'T3', 'T11']`).
+This verification checks that the user belongs to a `valid_type?` (currently `['T1', 'T2', 'T3', 'T11']`) or to an admin list.
 
 ## Remove survey answer from a user
 

@@ -39,18 +39,7 @@ if Rails.application.secrets.dig(:omniauth, :keycloakopenid, :enabled)
       private
 
       def valid_user?(response)
-        valid_cn?(response.dig("extra", "raw_info", "cn")) || valid_type?(response.dig("extra", "raw_info", "tipusUsuari"))
-      end
-
-      # ACL starting with `cn=ACCES` mean that the user is an admin.
-      # The user should be allowed whatever its type.
-      def valid_cn?(acl_list)
-        return false unless acl_list
-
-        # Sometimes we receive "ACCES" and some times "ACCESS" so we use
-        # a regexp with the shorter one.
-        acl_list = [acl_list] if acl_list.is_a?(String)
-        acl_list.any? { |acl| /cn=#{Rails.application.secrets.dig(:omniauth, :keycloakopenid, :cn)}(,|\b)/i.match?(acl) }
+        valid_admin?(response.dig("extra", "raw_info", "user")) || valid_type?(response.dig("extra", "raw_info", "tipusUsuari"))
       end
 
       def valid_type?(type_list)
@@ -58,6 +47,13 @@ if Rails.application.secrets.dig(:omniauth, :keycloakopenid, :enabled)
 
         type_list = [type_list] if type_list.is_a?(String)
         type_list.any? { |type| type.in?(Rails.application.secrets.dig(:omniauth, :keycloakopenid, :user_types).split(",")) }
+      end
+
+      # Check if the user is in the list of allowed admin users
+      def valid_admin?(user)
+        return false unless user
+
+        user.in?(Rails.application.secrets.dig(:omniauth, :keycloakopenid, :admin_ids).split(","))
       end
     end
   end
