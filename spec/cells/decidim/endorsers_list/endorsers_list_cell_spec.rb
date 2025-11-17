@@ -24,7 +24,7 @@ module Decidim
       end
 
       it "displays the user nickname in the title attribute" do
-        expect(subject).to have_selector("div[title='@test_user']")
+        expect(subject).to have_css("div[title='@test_user']")
       end
     end
   end
