@@ -23,8 +23,12 @@ module Decidim
         allow(controller).to receive(:current_organization).and_return(organization)
       end
 
-      it "displays the user nickname in the title attribute" do
+      it "displays the user nickname in the title attribute on hover" do
         expect(subject).to have_css("div[title='@test_user']")
+      end
+
+      it "includes a link to the user profile" do
+        expect(subject).to have_link(other_user.name, href: "/profiles/test_user")
       end
     end
   end
