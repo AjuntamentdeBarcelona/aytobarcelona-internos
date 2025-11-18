@@ -12,7 +12,7 @@ gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-modu
 gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "main"
 gem "decidim-term_customizer", git: "https://github.com/Platoniq/decidim-module-term_customizer", branch: "main"
 
-gem "omniauth-saml", "~> 2.0"
+gem "omniauth-keycloak"
 
 # Metrics require a queue system and a daily cron
 gem "delayed_job_active_record"

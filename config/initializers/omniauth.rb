@@ -2,38 +2,35 @@
 
 OmniAuth.config.allowed_request_methods = [:post, :get]
 
-if Rails.application.secrets.dig(:omniauth, :imipre, :enabled)
-  module OmniAuth
-    module Strategies
-      # tell OmniAuth to load our strategy
-      autoload :Imipre, Rails.root.join("lib/imipre_strategy")
+if Rails.application.secrets.dig(:omniauth, :keycloakopenid, :enabled)
+  class OmniAuth::Strategies::KeycloakOpenId
+    info do
+      {
+        nickname: raw_info["user"],
+        name: raw_info["givenName"],
+        email: raw_info["email"]
+      }
     end
   end
-end
 
-Rails.logger.info "SAML ENABLED? #{Rails.application.secrets.dig(:omniauth, :saml, :enabled)}"
-if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
-  Devise.setup do |config|
-    config.omniauth :saml,
-                    idp_cert: Rails.application.secrets.dig(:omniauth, :saml, :idp_cert),
-                    idp_sso_target_url: Rails.application.secrets.dig(:omniauth, :saml, :idp_sso_target_url),
-                    sp_entity_id: Rails.application.secrets.dig(:omniauth, :saml, :sp_entity_id),
-                    strategy_class: Rails.application.secrets.dig(:omniauth, :saml, :strategy_class).constantize,
-                    attribute_statements: Rails.application.secrets.dig(:omniauth, :saml, :attribute_statements),
-                    certificate: Rails.application.secrets.dig(:omniauth, :saml, :certificate),
-                    private_key: Rails.application.secrets.dig(:omniauth, :saml, :private_key),
-                    security: Rails.application.secrets.dig(:omniauth, :saml, :security)
+  Rails.application.config.middleware.use OmniAuth::Builder do
+    provider :keycloak_openid,
+             Rails.application.secrets.dig(:omniauth, :keycloakopenid, :client_id),
+             Rails.application.secrets.dig(:omniauth, :keycloakopenid, :client_secret),
+             client_options: {
+               site: Rails.application.secrets.dig(:omniauth, :keycloakopenid, :site),
+               realm: Rails.application.secrets.dig(:omniauth, :keycloakopenid, :realm)
+             }
   end
 
   Rails.application.config.to_prepare do
     Devise::OmniauthCallbacksController.class_eval do
       skip_before_action :verify_authenticity_token
 
-      before_action :verify_user_type, only: :saml
+      before_action :verify_user_type, only: :keycloakopenid
 
       def verify_user_type
-        saml_response = OneLogin::RubySaml::Response.new(params["SAMLResponse"])
-        unless valid_user?(saml_response)
+        unless valid_user?(request.env["omniauth.auth"])
           flash[:error] = I18n.t("devise.failure.invalid_user_type")
           redirect_to root_path
         end
@@ -42,24 +39,24 @@ if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
       private
 
       def valid_user?(response)
-        valid_cn?(response.attributes.multi(:ACL)) || valid_type?(response.attributes.multi(:tipusUsuari))
-      end
-
-      # ACL starting with `cn=ACCES` mean that the user is an admin.
-      # The user should be allowed whatever its type.
-      def valid_cn?(acl_list)
-        # Sometimes we receive "ACCES" and some times "ACCESS" so we use
-        # a regexp with the shorter one.
-        acl_list.any? { |acl| /cn=#{Rails.application.secrets.dig(:omniauth, :saml, :cn)}(,|\b)/i.match? acl }
+        valid_admin?(response.dig("extra", "raw_info", "user")) || valid_type?(response.dig("extra", "raw_info", "tipusUsuari"))
       end
 
       def valid_type?(type_list)
-        type_list.any? { |type| type.in? Rails.application.secrets.dig(:omniauth, :saml, :user_types) }
+        return false unless type_list
+
+        type_list = [type_list] if type_list.is_a?(String)
+        type_list.any? { |type| type.in?(Rails.application.secrets.dig(:omniauth, :keycloakopenid, :user_types).split(",")) }
+      end
+
+      # Check if the user is in the list of allowed admin users
+      def valid_admin?(user)
+        return false unless user
+
+        user.in?(Rails.application.secrets.dig(:omniauth, :keycloakopenid, :admin_ids).split(","))
       end
     end
   end
-
-  # Decidim::User.omniauth_providers << :saml
 end
 
 OmniAuth.config.logger = Rails.logger
