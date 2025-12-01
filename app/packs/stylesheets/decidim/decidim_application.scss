@@ -22,7 +22,7 @@
   width: auto;
 }
 
-body>div.layout-container>header>div.brand-bar>div.bcn-logo>a>span {
+body > div.layout-container > header > div.brand-bar > div.bcn-logo > a > span {
   display: none;
 }
 
@@ -33,10 +33,10 @@ body>div.layout-container>header>div.brand-bar>div.bcn-logo>a>span {
 }
 
 @media screen and (max-width: 1024px) {
-  .bcn-footer>.brand-bar {
+  .bcn-footer > .brand-bar {
     display: block;
 
-    a>img {
+    a > img {
       margin: auto;
       scale: 90%;
     }
