@@ -5,3 +5,40 @@
 // To override CSS variables or Foundation settings use _decidim-settings.scss
 //
 // By default this is empty.
+.bcn-footer {
+  background-color: #ff2828;
+
+  svg {
+    display: none;
+  }
+}
+
+.brand-bar {
+  padding-top: 0.7rem !important;
+  padding-bottom: 0.2rem !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: auto;
+}
+
+body>div.layout-container>header>div.brand-bar>div.bcn-logo>a>span {
+  display: none;
+}
+
+@media screen and (max-width: 1279px) {
+  .brand-bar {
+    padding-right: 1rem !important;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .bcn-footer>.brand-bar {
+    display: block;
+
+    a>img {
+      margin: auto;
+      scale: 90%;
+    }
+  }
+}
