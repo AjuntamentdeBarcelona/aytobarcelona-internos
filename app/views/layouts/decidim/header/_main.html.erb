@@ -1,0 +1,63 @@
+<div class="brand-bar home__section">
+  <div class="bcn-cat-link">
+    <%= link_to "https://www.barcelona.cat", target: "_blank", data: { external_link: "text-only" } do %>
+      <%= image_pack_tag "media/images/logo-ajbcn.svg", class: "bcnbrand-main-link", alt: t(".organization_logo") %>
+    <% end %>
+  </div>
+  <div class="col-12 col-md-6 header_wrapper">
+    <span class="valors">
+      <span class="valor_1">Agilitat</span>
+      <span class="valor_2">Amabilitat</span>
+      <span class="valor_3">Compromís de servei públic</span>
+      <span class="valor_4">Claredat</span>
+      <span class="valor_5">Cocreació</span>
+    </span>
+  </div>
+</div>
+<div id="main-bar" class="main-bar__container">
+  <% if content_for?(:focus_mode_back_button) %>
+    <div class="main-bar main-bar--focus-mode-back-button">
+      <%= render partial: "layouts/decidim/header/focus_mode_back_button" %>
+      <% if content_for?(:exit_focus_mode_button) %>
+        <% if content_for?(:focus_mode) %>
+          <%= render partial: "layouts/decidim/header/focus_mode_close_button" %>
+        <% elsif current_user&.ephemeral? %>
+          <%= render partial: "layouts/decidim/header/close_ephemeral_session" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="main-bar">
+      <% if content_for?(:focus_mode_back_button) %>
+        <div class="main-bar main-bar--focus-mode-back-button">
+          <%= render partial: "layouts/decidim/header/focus_mode_back_button" %>
+        </div>
+      <% else %>
+        <div class="main-bar__logo">
+          <div class="main-bar__logo-desktop">
+            <%= render partial: "layouts/decidim/logo", locals: { organization: current_organization } %>
+          </div>
+          <div class="main-bar__logo-mobile">
+            <%= render partial: "layouts/decidim/logo_mobile", locals: { organization: current_organization } %>
+          </div>
+        </div>
+      <% end %>
+      <% if content_for?(:focus_mode) %>
+        <%= render partial: "layouts/decidim/header/focus_mode_close_button" %>
+      <% elsif current_user&.ephemeral? %>
+        <%= render partial: "layouts/decidim/header/close_ephemeral_session" %>
+      <% else %>
+        <div class="main-bar__search">
+          <%= render partial: "layouts/decidim/header/main_search" %>
+        </div>
+        <div class="main-bar__links-desktop">
+          <%= render partial: "layouts/decidim/header/main_links_desktop" %>
+        </div>
+        <div class="main-bar__menu-mobile">
+          <%= render partial: "layouts/decidim/header/main_menu_mobile" %>
+        </div>
+        <%= render partial: "layouts/decidim/header/main_links_mobile_account" if current_user %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

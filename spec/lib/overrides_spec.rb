@@ -23,7 +23,8 @@ checksums = [
       # Deface footer override to add feder logo
       "/app/views/layouts/decidim/footer/_main.html.erb" => "b22323d9508fa8a14bd669d665a04634",
       "/app/cells/decidim/endorsers_list/full.erb" => "471f45188c48d88551feedc60cb56801",
-      # Barcelona branded logo
+      # Barcelona branded logos
+      "/app/views/layouts/decidim/header/_main.html.erb" => "c4f48e1064175113c72be021c8c56d33",
       "/app/views/layouts/decidim/footer/_mini.html.erb" => "ccead2f5f20557ea4db1501de943f82b"
     }
   },
