@@ -9,8 +9,7 @@ checksums = [
   {
     package: "decidim-direct_verifications",
     files: {
-      # The only change for controllers is the full namespace for the parent class as it didn't resolved it well when it
-      # was just ApplicationController
+      # The only change for controllers is the full namespace for the parent class as it didn't resolved it well when it was just ApplicationController
       "/app/controllers/decidim/direct_verifications/verification/admin/authorizations_controller.rb" => "5b713aa72da2ba5e4f0fefa840816004",
       "/app/controllers/decidim/direct_verifications/verification/admin/direct_verifications_controller.rb" => "dfe29d5353030989c07866d37b794157",
       "/app/controllers/decidim/direct_verifications/verification/admin/imports_controller.rb" => "43852a21a6aca14404c2959bb70bdb19",
@@ -23,7 +22,9 @@ checksums = [
     files: {
       # Deface footer override to add feder logo
       "/app/views/layouts/decidim/footer/_main.html.erb" => "b22323d9508fa8a14bd669d665a04634",
-      "/app/cells/decidim/endorsers_list/full.erb" => "471f45188c48d88551feedc60cb56801"
+      "/app/cells/decidim/endorsers_list/full.erb" => "471f45188c48d88551feedc60cb56801",
+      # Barcelona branded logo
+      "/app/views/layouts/decidim/footer/_mini.html.erb" => "ccead2f5f20557ea4db1501de943f82b"
     }
   },
   {
