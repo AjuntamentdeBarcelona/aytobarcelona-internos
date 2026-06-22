@@ -8,7 +8,7 @@ DECIDIM_VERSION = "0.30.2"
 
 gem "decidim", DECIDIM_VERSION
 
-gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: "main"
+gem "decidim-decidim_awesome", "~> 0.13.2"
 gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "main"
 gem "decidim-term_customizer", git: "https://github.com/Platoniq/decidim-module-term_customizer", branch: "main"
 
