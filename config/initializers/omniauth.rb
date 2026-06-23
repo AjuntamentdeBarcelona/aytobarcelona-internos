@@ -2,27 +2,25 @@
 
 OmniAuth.config.allowed_request_methods = [:post, :get]
 
-if Rails.application.secrets.dig(:omniauth, :imipre, :enabled)
-  module OmniAuth
-    module Strategies
-      # tell OmniAuth to load our strategy
-      autoload :Imipre, Rails.root.join("lib/imipre_strategy")
-    end
-  end
-end
-
-Rails.logger.info "SAML ENABLED? #{Rails.application.secrets.dig(:omniauth, :saml, :enabled)}"
-if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
+saml_enabled = Decidim::Env.new("SAML_ENABLED").present?
+Rails.logger.info "SAML ENABLED? #{saml_enabled}"
+if saml_enabled
   Devise.setup do |config|
     config.omniauth :saml,
-                    idp_cert: Rails.application.secrets.dig(:omniauth, :saml, :idp_cert),
-                    idp_sso_target_url: Rails.application.secrets.dig(:omniauth, :saml, :idp_sso_target_url),
-                    sp_entity_id: Rails.application.secrets.dig(:omniauth, :saml, :sp_entity_id),
-                    strategy_class: Rails.application.secrets.dig(:omniauth, :saml, :strategy_class).constantize,
-                    attribute_statements: Rails.application.secrets.dig(:omniauth, :saml, :attribute_statements),
-                    certificate: Rails.application.secrets.dig(:omniauth, :saml, :certificate),
-                    private_key: Rails.application.secrets.dig(:omniauth, :saml, :private_key),
-                    security: Rails.application.secrets.dig(:omniauth, :saml, :security)
+                    idp_cert: ENV.fetch("SAML_IDP_CERT", nil),
+                    idp_sso_target_url: ENV.fetch("SAML_IDP_SSO_TARGET_URL", nil),
+                    sp_entity_id: ENV.fetch("SAML_SP_ENTITY_ID", nil),
+                    strategy_class: (ENV["SAML_STRATEGY_CLASS"].presence || "OmniAuth::Strategies::SAML").constantize,
+                    attribute_statements: {
+                      email: %w(mail),
+                      name: %w(givenName nom)
+                    },
+                    certificate: ENV.fetch("SAML_CERTIFICATE", nil),
+                    private_key: ENV.fetch("SAML_PRIVATE_KEY", nil),
+                    security: {
+                      authn_requests_signed: Decidim::Env.new("SAML_SECURITY_AUTHN_REQUESTS_SIGNED", "true").present?,
+                      signature_method: ENV["SAML_SECURITY_SIGNATURE_METHOD"].presence || XMLSecurity::Document::RSA_SHA256
+                    }
   end
 
   Rails.application.config.to_prepare do
@@ -50,11 +48,12 @@ if Rails.application.secrets.dig(:omniauth, :saml, :enabled)
       def valid_cn?(acl_list)
         # Sometimes we receive "ACCES" and some times "ACCESS" so we use
         # a regexp with the shorter one.
-        acl_list.any? { |acl| /cn=#{Rails.application.secrets.dig(:omniauth, :saml, :cn)}(,|\b)/i.match? acl }
+        acl_list.any? { |acl| /cn=#{Decidim::Env.new("SAML_CN", "ACCES")}(,|\b)/i.match? acl }
       end
 
       def valid_type?(type_list)
-        type_list.any? { |type| type.in? Rails.application.secrets.dig(:omniauth, :saml, :user_types) }
+        user_types = Decidim::Env.new("SAML_USER_TYPES", "T1,T2,T3,T11").to_array
+        type_list.any? { |type| type.in?(user_types) }
       end
     end
   end

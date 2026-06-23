@@ -23,15 +23,15 @@ checksums = [
     files: {
       # Deface footer override to add feder logo
       "/app/views/layouts/decidim/footer/_main.html.erb" => "2d3ecb9824c197951ef8fd7a77bed7d0",
-      "/app/cells/decidim/endorsers_list/full.erb" => "471f45188c48d88551feedc60cb56801"
+      "/app/cells/decidim/likers_list/full.erb" => "dd10ba2333541afc7e5ca8694d678222"
     }
   },
   {
     package: "decidim-proposals",
     files: {
       # Update proposal title size
-      "/app/forms/decidim/proposals/admin/proposal_form.rb" => "34e42ec6c9911b60c28d2bb49f066a8c",
-      "/app/forms/decidim/proposals/proposal_form.rb" => "8db839481fec2a53acecabbf22377aa6"
+      "/app/forms/decidim/proposals/admin/proposal_form.rb" => "c222792947e0bac2cd4869adb5ce13bb",
+      "/app/forms/decidim/proposals/proposal_form.rb" => "ffa0fa0d38a9c77d73d173727bc87cd2"
     }
   }
 ]
