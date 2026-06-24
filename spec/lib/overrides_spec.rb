@@ -25,7 +25,9 @@ checksums = [
       "/app/views/layouts/decidim/footer/_main.html.erb" => "2d3ecb9824c197951ef8fd7a77bed7d0",
       # Deface header override to add the Barcelona institutional brand-bar (logo + values banner)
       "/app/views/layouts/decidim/header/_main.html.erb" => "a090eeca739613446d2eab8f4de513b1",
-      "/app/cells/decidim/likers_list/full.erb" => "dd10ba2333541afc7e5ca8694d678222"
+      "/app/cells/decidim/likers_list/full.erb" => "dd10ba2333541afc7e5ca8694d678222",
+      # OfficialAuthorPresenterOverride patches #avatar_url onto this presenter to show the Barcelona official avatar
+      "/app/presenters/decidim/official_author_presenter.rb" => "dbfb2fefa1c75d703e65443cd68014c2"
     }
   },
   {
