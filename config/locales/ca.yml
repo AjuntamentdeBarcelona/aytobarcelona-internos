@@ -8,3 +8,9 @@ ca:
       application_helper:
         filter_origin_values:
           citizens: Personal municipal
+  layouts:
+    decidim:
+      header:
+        main:
+          organization_logo: Logo Ajuntament de Barcelona
+          values: "Valors de l'Ajuntament de Barcelona: Agilitat, Amabilitat, Compromís de servei públic, Claredat, Cocreació"

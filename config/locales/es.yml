@@ -1,0 +1,7 @@
+es:
+  layouts:
+    decidim:
+      header:
+        main:
+          organization_logo: Logo Ayuntamiento de Barcelona
+          values: "Valores del Ayuntamiento de Barcelona: Agilidad, Amabilidad, Compromiso de servicio público, Claridad, Cocreación"

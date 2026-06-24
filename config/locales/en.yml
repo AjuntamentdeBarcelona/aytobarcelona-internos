@@ -1,0 +1,7 @@
+en:
+  layouts:
+    decidim:
+      header:
+        main:
+          organization_logo: Barcelona City Council Logo
+          values: "Barcelona City Council values: Agility, Kindness, Public service commitment, Clarity, Co-creation"
