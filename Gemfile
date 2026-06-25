@@ -7,6 +7,7 @@ ruby RUBY_VERSION
 DECIDIM_VERSION = "~> 0.31.0"
 
 gem "decidim", DECIDIM_VERSION
+gem "decidim-elections", DECIDIM_VERSION
 
 gem "decidim-decidim_awesome"
 gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "main"

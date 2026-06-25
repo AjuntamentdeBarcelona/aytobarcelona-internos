@@ -361,6 +361,10 @@ GEM
       w3c_rspec_validators (~> 0.3.0)
       webmock (~> 3.18)
       wisper-rspec (~> 1.0)
+    decidim-elections (0.31.5)
+      decidim-admin (= 0.31.5)
+      decidim-core (= 0.31.5)
+      decidim-forms (= 0.31.5)
     decidim-forms (0.31.5)
       decidim-core (= 0.31.5)
     decidim-generators (0.31.5)
@@ -1051,6 +1055,7 @@ DEPENDENCIES
   decidim-decidim_awesome
   decidim-dev (~> 0.31.0)
   decidim-direct_verifications!
+  decidim-elections (~> 0.31.0)
   decidim-term_customizer!
   deface (~> 1.9)
   delayed_job_active_record
