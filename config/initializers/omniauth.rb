@@ -58,6 +58,8 @@ if saml_enabled
     end
   end
 
+  Decidim.omniauth_providers = Decidim.omniauth_providers.merge(saml: { enabled: true })
+
   # Decidim::User.omniauth_providers << :saml
 end
 
