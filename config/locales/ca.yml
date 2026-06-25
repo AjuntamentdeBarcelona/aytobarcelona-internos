@@ -10,6 +10,8 @@ ca:
           citizens: Personal municipal
   layouts:
     decidim:
+      footer:
+        bcn_logo: Logotip de l'Ajuntament de Barcelona
       header:
         main:
           organization_logo: Logo Ajuntament de Barcelona

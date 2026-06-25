@@ -1,0 +1,6 @@
+<!-- insert_after ".mini-footer" -->
+<div class="bcn-footer">
+  <div class="brand-bar home__section">
+    <a href="https://www.barcelona.cat/ca" target="_blank"><%= image_pack_tag "media/images/logo-negre.svg", alt: t("layouts.decidim.footer.bcn_logo") %></a>
+  </div>
+</div>

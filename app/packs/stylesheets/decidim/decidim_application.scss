@@ -40,6 +40,25 @@
   @apply w-auto h-auto max-h-8 lg:max-h-10 max-w-full ml-auto;
 }
 
+.bcn-footer {
+  background-color: #ff2828;
+
+  svg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .bcn-footer > .brand-bar {
+    display: block;
+
+    a > img {
+      margin: auto;
+      scale: 90%;
+    }
+  }
+}
+
 .bcn-cat-link > a {
   font-weight: 600;
   font-size: 20px;

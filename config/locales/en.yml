@@ -1,6 +1,8 @@
 en:
   layouts:
     decidim:
+      footer:
+        bcn_logo: Barcelona City Council Logo
       header:
         main:
           organization_logo: Barcelona City Council Logo

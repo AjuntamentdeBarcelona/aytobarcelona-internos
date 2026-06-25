@@ -1,6 +1,8 @@
 es:
   layouts:
     decidim:
+      footer:
+        bcn_logo: Logotipo del Ayuntamiento de Barcelona
       header:
         main:
           organization_logo: Logo Ayuntamiento de Barcelona
