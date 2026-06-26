@@ -1,4 +1,36 @@
 en:
+  decidim:
+    authorization_handlers:
+      direct_verifications:
+        name: General census
+        explanation: Direct verification for the general census
+      direct_verifications_group1:
+        name: Group 1
+        explanation: Direct verification for the census of the Group 1
+      direct_verifications_group2:
+        name: Group 2
+        explanation: Direct verification for the census of the Group 2
+      direct_verifications_group3:
+        name: Group 3
+        explanation: Direct verification for the census of the Group 3
+      direct_verifications_group4:
+        name: Group 4
+        explanation: Direct verification for the census of the Group 4
+      direct_verifications_group5:
+        name: Group 5
+        explanation: Direct verification for the census of the Group 5
+      direct_verifications_group6:
+        name: Group 6
+        explanation: Direct verification for the census of the Group 6
+      direct_verifications_group7:
+        name: Group 7
+        explanation: Direct verification for the census of the Group 7
+      direct_verifications_group8:
+        name: Group 8
+        explanation: Direct verification for the census of the Group 8
+      direct_verifications_group9:
+        name: Group 9
+        explanation: Direct verification for the census of the Group 9
   layouts:
     decidim:
       footer:
