@@ -4,12 +4,12 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "~> 0.31.0"
+DECIDIM_VERSION = { git: "https://github.com/openpoke/decidim", branch: "0.31-backports" }.freeze
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-elections", DECIDIM_VERSION
 
-gem "decidim-decidim_awesome"
+gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: "main"
 gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "main"
 gem "decidim-term_customizer", git: "https://github.com/openpoke/decidim-module-term_customizer", branch: "main"
 

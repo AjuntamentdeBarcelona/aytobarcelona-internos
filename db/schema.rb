@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_25_132751) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_29_141046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
@@ -749,6 +749,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_25_132751) do
     t.jsonb "census_settings", default: {}, null: false
     t.datetime "published_results_at"
     t.integer "votes_count", default: 0, null: false
+    t.boolean "allow_census_check_before_start", default: false, null: false
     t.index ["census_manifest"], name: "index_decidim_elections_elections_on_census_manifest"
     t.index ["deleted_at"], name: "index_decidim_elections_elections_on_deleted_at"
     t.index ["end_at"], name: "index_decidim_elections_elections_on_end_at"
@@ -769,6 +770,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_25_132751) do
     t.datetime "voting_enabled_at"
     t.integer "votes_count", default: 0, null: false
     t.integer "response_options_count", default: 0, null: false
+    t.integer "max_choices"
     t.index ["election_id"], name: "index_questions_on_election_id"
   end
 
@@ -2227,6 +2229,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_25_132751) do
   add_foreign_key "decidim_term_customizer_constraints", "decidim_term_customizer_translation_sets", column: "translation_set_id"
   add_foreign_key "decidim_term_customizer_translations", "decidim_term_customizer_translation_sets", column: "translation_set_id"
   add_foreign_key "decidim_user_blocks", "decidim_users"
+  add_foreign_key "decidim_user_blocks", "decidim_users"
+  add_foreign_key "decidim_user_blocks", "decidim_users", column: "blocking_user_id"
   add_foreign_key "decidim_user_blocks", "decidim_users", column: "blocking_user_id"
   add_foreign_key "decidim_user_moderations", "decidim_users"
   add_foreign_key "decidim_user_reports", "decidim_user_moderations", column: "user_moderation_id"
