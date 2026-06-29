@@ -5,3 +5,67 @@
 // To override CSS variables or Foundation settings use _decidim-settings.scss
 //
 // By default this is empty.
+
+// Barcelona institutional brand-bar (rendered above the Decidim navbar via
+// app/overrides/layouts/decidim/header/_main/brand_bar.html.erb.deface).
+// `@apply container` gives it the same centering, responsive padding
+// (1rem / 4rem at lg) and max-widths as Decidim's `.main-bar` (also a
+// container), so the logo (left) and values banner (right) stay aligned with
+// the navbar below at every breakpoint.
+.brand-bar {
+  @apply container flex flex-row items-center justify-between gap-4;
+
+  padding-top: 0.7rem !important;
+  padding-bottom: 0.2rem !important;
+}
+
+// Barcelona logo (left). Never shrinks; max-height scales it down on smaller
+// screens while preserving aspect ratio.
+.bcn-cat-link {
+  @apply shrink-0;
+}
+
+.bcnbrand-main-link {
+  @apply w-auto h-auto max-h-9 lg:max-h-12;
+}
+
+// Institutional values banner (right). Capped by both max-height and a
+// percentage max-width so it scales down proportionally with the bar instead
+// of overflowing or being hidden — same resize/position logic as the logo.
+.brand-bar__values {
+  @apply min-w-0 max-w-[55%] self-end;
+}
+
+.bcnbrand-values {
+  @apply w-auto h-auto max-h-8 lg:max-h-10 max-w-full ml-auto;
+}
+
+.bcn-footer {
+  background-color: #ff2828;
+
+  svg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .bcn-footer > .brand-bar {
+    display: block;
+
+    a > img {
+      margin: auto;
+      scale: 90%;
+    }
+  }
+}
+
+.bcn-cat-link > a {
+  font-weight: 600;
+  font-size: 20px;
+  color: black;
+  line-height: 35px;
+  letter-spacing: -0.5px;
+  background-size: 0;
+  text-decoration: none;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

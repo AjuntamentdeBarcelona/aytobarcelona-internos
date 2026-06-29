@@ -23,15 +23,21 @@ checksums = [
     files: {
       # Deface footer override to add feder logo
       "/app/views/layouts/decidim/footer/_main.html.erb" => "2d3ecb9824c197951ef8fd7a77bed7d0",
-      "/app/cells/decidim/endorsers_list/full.erb" => "471f45188c48d88551feedc60cb56801"
+      # Deface footer override to add the Barcelona institutional footer band (logo-negre)
+      "/app/views/layouts/decidim/footer/_mini.html.erb" => "c67cc97db27cdcf926f60682e399f688",
+      # Deface header override to add the Barcelona institutional brand-bar (logo + values banner)
+      "/app/views/layouts/decidim/header/_main.html.erb" => "a090eeca739613446d2eab8f4de513b1",
+      "/app/cells/decidim/likers_list/full.erb" => "dd10ba2333541afc7e5ca8694d678222",
+      # OfficialAuthorPresenterOverride patches #avatar_url onto this presenter to show the Barcelona official avatar
+      "/app/presenters/decidim/official_author_presenter.rb" => "dbfb2fefa1c75d703e65443cd68014c2"
     }
   },
   {
     package: "decidim-proposals",
     files: {
       # Update proposal title size
-      "/app/forms/decidim/proposals/admin/proposal_form.rb" => "34e42ec6c9911b60c28d2bb49f066a8c",
-      "/app/forms/decidim/proposals/proposal_form.rb" => "8db839481fec2a53acecabbf22377aa6"
+      "/app/forms/decidim/proposals/admin/proposal_form.rb" => "c222792947e0bac2cd4869adb5ce13bb",
+      "/app/forms/decidim/proposals/proposal_form.rb" => "ffa0fa0d38a9c77d73d173727bc87cd2"
     }
   }
 ]
