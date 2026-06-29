@@ -4,7 +4,7 @@ require "rails_helper"
 
 # rubocop:disable RSpec/DescribeClass
 describe "new registration" do
-  let(:organization) { create(:organization) }
+  let(:organization) { create(:organization, default_locale: "ca", available_locales: %w(ca es en)) }
 
   before do
     app_host = (organization.host ? "http://#{organization.host}:3000" : nil)

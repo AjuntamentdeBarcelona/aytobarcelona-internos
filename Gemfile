@@ -4,13 +4,14 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.30.2"
+DECIDIM_VERSION = "~> 0.31.0"
 
 gem "decidim", DECIDIM_VERSION
+gem "decidim-elections", DECIDIM_VERSION
 
-gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: "main"
+gem "decidim-decidim_awesome"
 gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "main"
-gem "decidim-term_customizer", git: "https://github.com/Platoniq/decidim-module-term_customizer", branch: "main"
+gem "decidim-term_customizer", git: "https://github.com/openpoke/decidim-module-term_customizer", branch: "main"
 
 gem "omniauth-keycloak"
 
@@ -59,5 +60,6 @@ group :development do
 end
 
 group :production do
+  gem "appsignal"
   gem "figaro", "~> 1.2"
 end

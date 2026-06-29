@@ -2,7 +2,7 @@
 
 OmniAuth.config.allowed_request_methods = [:post, :get]
 
-if Rails.application.secrets.dig(:omniauth, :keycloakopenid, :enabled)
+if Decidim::Env.new("OMNIAUTH_KEYCLOAK_CLIENT_ID").present?
   class OmniAuth::Strategies::KeycloakOpenId
     info do
       {
@@ -15,11 +15,11 @@ if Rails.application.secrets.dig(:omniauth, :keycloakopenid, :enabled)
 
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider :keycloak_openid,
-             Rails.application.secrets.dig(:omniauth, :keycloakopenid, :client_id),
-             Rails.application.secrets.dig(:omniauth, :keycloakopenid, :client_secret),
+             ENV.fetch("OMNIAUTH_KEYCLOAK_CLIENT_ID", nil),
+             ENV.fetch("OMNIAUTH_KEYCLOAK_CLIENT_SECRET", nil),
              client_options: {
-               site: Rails.application.secrets.dig(:omniauth, :keycloakopenid, :site),
-               realm: Rails.application.secrets.dig(:omniauth, :keycloakopenid, :realm)
+               site: ENV.fetch("OMNIAUTH_KEYCLOAK_SITE", nil),
+               realm: ENV.fetch("OMNIAUTH_KEYCLOAK_REALM", nil)
              }
   end
 
@@ -46,17 +46,19 @@ if Rails.application.secrets.dig(:omniauth, :keycloakopenid, :enabled)
         return false unless type_list
 
         type_list = [type_list] if type_list.is_a?(String)
-        type_list.any? { |type| type.in?(Rails.application.secrets.dig(:omniauth, :keycloakopenid, :user_types).split(",")) }
+        type_list.any? { |type| type.in?(Decidim::Env.new("OMNIAUTH_USER_TYPES", "T1,T2,T3,T11").to_array) }
       end
 
       # Check if the user is in the list of allowed admin users
       def valid_admin?(user)
         return false unless user
 
-        user.in?(Rails.application.secrets.dig(:omniauth, :keycloakopenid, :admin_ids).split(","))
+        user.in?(Decidim::Env.new("OMNIAUTH_KEYCLOAK_ADMIN_IDS").to_array)
       end
     end
   end
+
+  Decidim.omniauth_providers = Decidim.omniauth_providers.merge(keycloakopenid: { enabled: true })
 end
 
 OmniAuth.config.logger = Rails.logger
