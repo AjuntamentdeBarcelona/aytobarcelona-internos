@@ -29,7 +29,9 @@ checksums = [
       "/app/views/layouts/decidim/header/_main.html.erb" => "a090eeca739613446d2eab8f4de513b1",
       "/app/cells/decidim/likers_list/full.erb" => "dd10ba2333541afc7e5ca8694d678222",
       # OfficialAuthorPresenterOverride patches #avatar_url onto this presenter to show the Barcelona official avatar
-      "/app/presenters/decidim/official_author_presenter.rb" => "dbfb2fefa1c75d703e65443cd68014c2"
+      "/app/presenters/decidim/official_author_presenter.rb" => "dbfb2fefa1c75d703e65443cd68014c2",
+      # CreateOmniauthRegistrationOverride normalizes (strip + downcase) the verified_email before the user lookup
+      "/app/commands/decidim/create_omniauth_registration.rb" => "5f84f2312b8cea28a5e6411796df4a8a"
     }
   },
   {
