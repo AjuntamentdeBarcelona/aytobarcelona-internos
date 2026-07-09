@@ -21,6 +21,16 @@ Rails.application.config.to_prepare do
   # how `avatar_url` is resolved and update the override accordingly.
   Decidim::OfficialAuthorPresenter.include(Decidim::OfficialAuthorPresenterOverride)
 
+  # Downcases/strips the SAML-verified email before the user lookup so people
+  # whose IdP `mail` attribute has uppercase letters can log in and get their
+  # identity linked, instead of failing with "Another account is using the same
+  # email address".
+  #
+  # NOTE: if the "Overridden files" checksum spec for
+  # `decidim/create_omniauth_registration.rb` fails after a Decidim upgrade,
+  # re-check how `verified_email` is used and update the override accordingly.
+  Decidim::CreateOmniauthRegistration.prepend(Decidim::CreateOmniauthRegistrationOverride)
+
   # Extends the proposal title size to 250 characters.
   #
   # At runtime the title length is validated by a `ProposalLengthValidator`: even
