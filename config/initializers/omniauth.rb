@@ -2,36 +2,35 @@
 
 OmniAuth.config.allowed_request_methods = [:post, :get]
 
-saml_enabled = Decidim::Env.new("SAML_ENABLED").present?
-Rails.logger.info "SAML ENABLED? #{saml_enabled}"
-if saml_enabled
-  Devise.setup do |config|
-    config.omniauth :saml,
-                    idp_cert: ENV.fetch("SAML_IDP_CERT", nil),
-                    idp_sso_target_url: ENV.fetch("SAML_IDP_SSO_TARGET_URL", nil),
-                    sp_entity_id: ENV.fetch("SAML_SP_ENTITY_ID", nil),
-                    strategy_class: (ENV["SAML_STRATEGY_CLASS"].presence || "OmniAuth::Strategies::SAML").constantize,
-                    attribute_statements: {
-                      email: %w(mail),
-                      name: %w(givenName nom)
-                    },
-                    certificate: ENV.fetch("SAML_CERTIFICATE", nil),
-                    private_key: ENV.fetch("SAML_PRIVATE_KEY", nil),
-                    security: {
-                      authn_requests_signed: Decidim::Env.new("SAML_SECURITY_AUTHN_REQUESTS_SIGNED", "true").present?,
-                      signature_method: ENV["SAML_SECURITY_SIGNATURE_METHOD"].presence || XMLSecurity::Document::RSA_SHA256
-                    }
+if Decidim::Env.new("OMNIAUTH_KEYCLOAK_CLIENT_ID").present?
+  class OmniAuth::Strategies::KeycloakOpenId
+    info do
+      {
+        nickname: raw_info["user"],
+        name: raw_info["givenName"],
+        email: raw_info["email"]
+      }
+    end
+  end
+
+  Rails.application.config.middleware.use OmniAuth::Builder do
+    provider :keycloak_openid,
+             ENV.fetch("OMNIAUTH_KEYCLOAK_CLIENT_ID", nil),
+             ENV.fetch("OMNIAUTH_KEYCLOAK_CLIENT_SECRET", nil),
+             client_options: {
+               site: ENV.fetch("OMNIAUTH_KEYCLOAK_SITE", nil),
+               realm: ENV.fetch("OMNIAUTH_KEYCLOAK_REALM", nil)
+             }
   end
 
   Rails.application.config.to_prepare do
     Devise::OmniauthCallbacksController.class_eval do
       skip_before_action :verify_authenticity_token
 
-      before_action :verify_user_type, only: :saml
+      before_action :verify_user_type, only: :keycloakopenid
 
       def verify_user_type
-        saml_response = OneLogin::RubySaml::Response.new(params["SAMLResponse"])
-        unless valid_user?(saml_response)
+        unless valid_user?(request.env["omniauth.auth"])
           flash[:error] = I18n.t("devise.failure.invalid_user_type")
           redirect_to root_path
         end
@@ -40,27 +39,26 @@ if saml_enabled
       private
 
       def valid_user?(response)
-        valid_cn?(response.attributes.multi(:ACL)) || valid_type?(response.attributes.multi(:tipusUsuari))
-      end
-
-      # ACL starting with `cn=ACCES` mean that the user is an admin.
-      # The user should be allowed whatever its type.
-      def valid_cn?(acl_list)
-        # Sometimes we receive "ACCES" and some times "ACCESS" so we use
-        # a regexp with the shorter one.
-        acl_list.any? { |acl| /cn=#{Decidim::Env.new("SAML_CN", "ACCES")}(,|\b)/i.match? acl }
+        valid_admin?(response.dig("extra", "raw_info", "user")) || valid_type?(response.dig("extra", "raw_info", "tipusUsuari"))
       end
 
       def valid_type?(type_list)
-        user_types = Decidim::Env.new("SAML_USER_TYPES", "T1,T2,T3,T11").to_array
-        type_list.any? { |type| type.in?(user_types) }
+        return false unless type_list
+
+        type_list = [type_list] if type_list.is_a?(String)
+        type_list.any? { |type| type.in?(Decidim::Env.new("OMNIAUTH_USER_TYPES", "T1,T2,T3,T11").to_array) }
+      end
+
+      # Check if the user is in the list of allowed admin users
+      def valid_admin?(user)
+        return false unless user
+
+        user.in?(Decidim::Env.new("OMNIAUTH_KEYCLOAK_ADMIN_IDS").to_array)
       end
     end
   end
 
-  Decidim.omniauth_providers = Decidim.omniauth_providers.merge(saml: { enabled: true })
-
-  # Decidim::User.omniauth_providers << :saml
+  Decidim.omniauth_providers = Decidim.omniauth_providers.merge(keycloakopenid: { enabled: true })
 end
 
 OmniAuth.config.logger = Rails.logger
