@@ -31,7 +31,9 @@ checksums = [
       # OfficialAuthorPresenterOverride patches #avatar_url onto this presenter to show the Barcelona official avatar
       "/app/presenters/decidim/official_author_presenter.rb" => "dbfb2fefa1c75d703e65443cd68014c2",
       # CreateOmniauthRegistrationOverride normalizes (strip + downcase) the verified_email before the user lookup
-      "/app/commands/decidim/create_omniauth_registration.rb" => "9c76a3012fffc7fec10ae3fe44046525"
+      "/app/commands/decidim/create_omniauth_registration.rb" => "9c76a3012fffc7fec10ae3fe44046525",
+      # LikeOverride backports decidim/decidim#17792; remove it once the backport is released
+      "/app/models/decidim/like.rb" => "c9e98e76d9943a03194c3919e69b8b13"
     }
   },
   {
