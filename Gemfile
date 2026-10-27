@@ -4,14 +4,14 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = { git: "https://github.com/openpoke/decidim", branch: "0.31-backports" }.freeze
+DECIDIM_VERSION = "~> 0.32.2"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-elections", DECIDIM_VERSION
 
 gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: "main"
 gem "decidim-direct_verifications", git: "https://github.com/Platoniq/decidim-verifications-direct_verifications", branch: "main"
-gem "decidim-term_customizer", git: "https://github.com/openpoke/decidim-module-term_customizer", branch: "main"
+gem "decidim-term_customizer", git: "https://github.com/Platoniq/decidim-module-term_customizer", branch: "main"
 
 gem "omniauth-keycloak"
 
@@ -30,6 +30,9 @@ gem "faker"
 gem "wicked_pdf", "~> 2.1"
 
 gem "deface", "~> 1.9"
+
+# Required by decidim-api; 0.5.3 has no precompiled gem and needs Rust + libclang to build
+gem "selma", "< 0.5.3"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
