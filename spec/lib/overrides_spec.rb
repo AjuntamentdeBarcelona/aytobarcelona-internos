@@ -41,6 +41,14 @@ checksums = [
       "/app/forms/decidim/proposals/admin/proposal_form.rb" => "5c6cc25fddd1964b2027eb92536268dd",
       "/app/forms/decidim/proposals/proposal_form.rb" => "fb1b26c23bf3d0dbe59ad02509e6445a"
     }
+  },
+  {
+    package: "decidim-decidim_awesome",
+    files: {
+      # Drop locale: nil from form_builder_i18n_path; Decidim 0.32.2 mounts awesome under /:locale
+      # https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/680
+      "/app/views/layouts/decidim/decidim_awesome/_awesome_config.html.erb" => "5d17899dbde9399032cac312db3ac02e"
+    }
   }
 ]
 
