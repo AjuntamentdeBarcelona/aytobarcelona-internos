@@ -2,7 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable RSpec/DescribeClass
 describe "new registration" do
   let(:organization) { create(:organization, default_locale: "ca", available_locales: %w(ca es en)) }
 
@@ -21,4 +20,3 @@ describe "new registration" do
     expect(page).to have_content "Fons Europeu de Desenvolupament Regional"
   end
 end
-# rubocop:enable RSpec/DescribeClass

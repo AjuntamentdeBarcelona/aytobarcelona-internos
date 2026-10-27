@@ -8,11 +8,11 @@ module Decidim
     controller Decidim::PagesController
 
     let(:organization) { create(:organization) }
-    let(:user) { create(:user, :confirmed, organization: organization) }
-    let(:other_user) { create(:user, :confirmed, nickname: "test_user", organization: organization) }
-    let(:participatory_space) { create(:participatory_process, organization: organization) }
-    let(:component) { create(:proposal_component, participatory_space: participatory_space) }
-    let(:proposal) { create(:proposal, component: component) }
+    let(:user) { create(:user, :confirmed, organization:) }
+    let(:other_user) { create(:user, :confirmed, nickname: "test_user", organization:) }
+    let(:participatory_space) { create(:participatory_process, organization:) }
+    let(:component) { create(:proposal_component, participatory_space:) }
+    let(:proposal) { create(:proposal, component:) }
     let!(:like) { create(:like, resource: proposal, author: other_user) }
 
     context "when rendering the likers list modal" do
