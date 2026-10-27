@@ -6,6 +6,7 @@ module Decidim
       module Admin
         class DirectVerificationsController < Decidim::DirectVerifications::Verification::Admin::ApplicationController
           include NeedsPermission
+
           helper_method :workflows, :current_authorization_handler
 
           layout "decidim/admin/users"

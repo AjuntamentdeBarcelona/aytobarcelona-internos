@@ -6,6 +6,7 @@ module Decidim
       module Admin
         class UserAuthorizationsController < Decidim::DirectVerifications::Verification::Admin::ApplicationController
           include NeedsPermission
+
           layout false
 
           helper_method :user, :authorizations, :authorization_for, :managed?
