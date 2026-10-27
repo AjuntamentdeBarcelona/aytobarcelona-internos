@@ -28,7 +28,7 @@ module Decidim
       end
 
       it "includes a link to the user profile" do
-        expect(subject).to have_link(other_user.name, href: "/profiles/test_user")
+        expect(subject).to have_link(other_user.name, href: "/en/profiles/test_user")
       end
     end
   end

@@ -11,12 +11,12 @@ describe "new registration" do
   end
 
   it "display feder logo on footer on homepage" do
-    visit "/"
+    visit "/ca"
     expect(page).to have_content "Fons Europeu de Desenvolupament Regional"
   end
 
   it "display feder logo on footer on user registration page" do
-    visit "/users/sign_up"
+    visit "/ca/users/sign_up"
     expect(page).to have_content "Fons Europeu de Desenvolupament Regional"
   end
 end
