@@ -55,7 +55,7 @@ group :development do
 
   gem "capistrano", "~> 3.14"
   gem "capistrano3-delayed-job", "~> 1.0"
-  gem "capistrano-bundler", "~> 1.2"
+  gem "capistrano-bundler", "~> 2.2"
   gem "capistrano-nvm"
   gem "capistrano-passenger"
   gem "capistrano-rails"
