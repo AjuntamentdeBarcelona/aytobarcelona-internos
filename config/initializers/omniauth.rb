@@ -58,7 +58,7 @@ if Decidim::Env.new("OMNIAUTH_KEYCLOAK_CLIENT_ID").present?
     end
   end
 
-  Decidim.omniauth_providers = Decidim.omniauth_providers.merge(keycloakopenid: { enabled: true })
+  Decidim.omniauth_providers = Decidim.omniauth_providers.merge(keycloakopenid: { enabled: true, icon: "login-box-line" })
 end
 
 OmniAuth.config.logger = Rails.logger

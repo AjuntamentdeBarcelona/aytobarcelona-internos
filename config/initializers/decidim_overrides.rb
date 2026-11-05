@@ -31,6 +31,12 @@ Rails.application.config.to_prepare do
   # re-check how `verified_email` is used and update the override accordingly.
   Decidim::CreateOmniauthRegistration.prepend(Decidim::CreateOmniauthRegistrationOverride)
 
+  # Lists likes chronologically instead of by author (regression since 0.31).
+  #
+  # Backport of decidim/decidim#17792, merged into develop but not yet released for 0.32.
+  # TODO: remove this override, its spec and its checksum once the backport is released.
+  Decidim::Like.include(Decidim::LikeOverride)
+
   # Extends the proposal title size to 250 characters.
   #
   # At runtime the title length is validated by a `ProposalLengthValidator`: even
