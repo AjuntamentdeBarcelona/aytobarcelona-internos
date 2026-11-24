@@ -24,10 +24,7 @@
     "stylelint-fix": "stylelint app/packs/stylesheets/**/*.scss --fix"
   },
   "stylelint": {
-    "extends": "@decidim/stylelint-config",
-    "rules": {
-      "block-opening-brace-space-before": "always"
-    }
+    "extends": "@decidim/stylelint-config"
   },
   "devDependencies": {
     "@decidim/dev": "^0.32.3",
