@@ -5,7 +5,7 @@ module Decidim
   # look up the user.
   #
   # `CreateOmniauthRegistration#create_or_find_user` matches the existing user
-  # with `User.find_or_initialize_by(email: verified_email)`, an exact SQL
+  # with `organization.users.find_or_initialize_by(email: verified_email)`, an exact SQL
   # comparison, while Devise stores emails downcased. When the SAML `mail`
   # attribute arrives with uppercase letters (or trailing whitespace) the lookup
   # misses, the command tries to create a duplicate user and the case-insensitive

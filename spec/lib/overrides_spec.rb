@@ -31,9 +31,7 @@ checksums = [
       # OfficialAuthorPresenterOverride patches #avatar_url onto this presenter to show the Barcelona official avatar
       "/app/presenters/decidim/official_author_presenter.rb" => "dbfb2fefa1c75d703e65443cd68014c2",
       # CreateOmniauthRegistrationOverride normalizes (strip + downcase) the verified_email before the user lookup
-      "/app/commands/decidim/create_omniauth_registration.rb" => "9c76a3012fffc7fec10ae3fe44046525",
-      # LikeOverride backports decidim/decidim#17792; remove it once the backport is released
-      "/app/models/decidim/like.rb" => "c9e98e76d9943a03194c3919e69b8b13"
+      "/app/commands/decidim/create_omniauth_registration.rb" => "5b11e0a0073c4aa0e39dd95b5d296ac0"
     }
   },
   {
@@ -42,14 +40,6 @@ checksums = [
       # Update proposal title size
       "/app/forms/decidim/proposals/admin/proposal_form.rb" => "5c6cc25fddd1964b2027eb92536268dd",
       "/app/forms/decidim/proposals/proposal_form.rb" => "fb1b26c23bf3d0dbe59ad02509e6445a"
-    }
-  },
-  {
-    package: "decidim-decidim_awesome",
-    files: {
-      # Drop locale: nil from form_builder_i18n_path; Decidim 0.32.2 mounts awesome under /:locale
-      # https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/680
-      "/app/views/layouts/decidim/decidim_awesome/_awesome_config.html.erb" => "5d17899dbde9399032cac312db3ac02e"
     }
   }
 ]

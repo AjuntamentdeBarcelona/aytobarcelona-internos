@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_26_155665) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_24_121703) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_catalog.plpgsql"
@@ -114,7 +114,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_155665) do
 
   create_table "decidim_action_logs", force: :cascade do |t|
     t.bigint "decidim_organization_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.bigint "decidim_component_id"
     t.string "resource_type", null: false
     t.bigint "resource_id", null: false
@@ -128,7 +128,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_155665) do
     t.string "visibility", default: "admin-only"
     t.integer "decidim_scope_id"
     t.integer "decidim_area_id"
-    t.string "user_type", default: "Decidim::User", null: false
+    t.string "user_type", default: "Decidim::User"
     t.index ["created_at"], name: "index_decidim_action_logs_on_created_at"
     t.index ["decidim_area_id"], name: "index_decidim_action_logs_on_decidim_area_id"
     t.index ["decidim_component_id"], name: "index_action_logs_on_component_id"
@@ -418,6 +418,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_155665) do
     t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "settings", default: {}, null: false
     t.index ["active", "position"], name: "index_decidim_awesome_fuq_on_active_position"
     t.index ["decidim_component_id"], name: "index_decidim_awesome_fuq_on_component_id"
     t.index ["decidim_organization_id"], name: "index_decidim_awesome_fuq_on_organization_id"
